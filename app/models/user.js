@@ -3,28 +3,28 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const schema = new Schema({
+  // 昵称
   name: String,
+  // 密码，使用明文
   password: String,
-  email: String,
+  // 手机号
   mobile: String,
+  // 真是姓名
   true_name: String,
   // 性别
   gender: Number,
-  birthday: Date,
+  // 城市
   city: String,
-  website: String,
-  company: String,
-  school: String,
-  job: String,
-  introduce: String,
+  // 令牌
   token: String,
   // 角色 []
   roles: Array,
-  last_login_date: Date,
   // 验证码
   verification_code: String,
-  // 用户的设备id，是个数组，在多个地方登陆
+  // 用户的设备id，是个数组，一个用户可能对应多台设备
   device_id: Array,
+  // 来源渠道id
+  channel_id: String,
   create_at: {
     type: Date,
     default: Date.now

@@ -29,8 +29,6 @@ const schema = new Schema({
   zhi_ma: Number,
   // 成功率
   success_rate: Number,
-  // 出现在界面次数
-  view_count: Number,
   // 链接点击次数
   click_count: Number,
   // 是否推荐

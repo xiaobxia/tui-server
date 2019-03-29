@@ -1,18 +1,18 @@
 const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
-// 游客（用于注册页面，那时还不算用户）
+// 用户点击产品链接
 const schema = new Schema({
+  // 用户手机号
+  mobile: String,
   // 设备id
   device_id: String,
   // 来源渠道id
   channel_id: String,
+  // 产品id
+  product_id: String,
   // 设备类型（iso，安卓，微信）
   device_type: String,
-  // 省
-  province: String,
-  // 市
-  city: String,
   create_at: {
     type: Date,
     default: Date.now

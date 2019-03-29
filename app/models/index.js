@@ -31,6 +31,9 @@ exports.LogAudit = require('./logAudit')
 exports.Dictionary = require('./dictionary')
 exports.Schedule = require('./schedule')
 exports.Visitor = require('./visitor')
+exports.Product = require('./product')
+exports.Channel = require('./channel')
+exports.UrlClick = require('./urlClick')
 
 // 字段
 exports.tableFields = require('./tableFields')
