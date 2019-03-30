@@ -74,4 +74,21 @@ router.get('/schedule/one', controllers.scheduleController.getSchedule)
 router.get('/test/testEmail', controllers.testController.testEmail)
 router.get('/test/testResponse', controllers.testController.testResponse)
 
+/**
+ * 日志模块
+ */
+router.post('/log/registerViewLog', controllers.logController.registerViewLog)
+
+/**
+ * 后台管理，用户模块
+ */
+router.get('/admin/getAdminUsers', controllers.userController.getAdminUsers)
+
+/**
+ * 渠道模块
+ */
+router.get('/channel/getChannels', controllers.channelController.getChannels)
+router.post('/channel/addChannel', controllers.channelController.addChannel)
+router.post('/channel/deleteChannel', controllers.channelController.deleteChannel)
+
 module.exports = router

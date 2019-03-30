@@ -30,11 +30,27 @@ const schema = new Schema({
   // 成功率
   success_rate: Number,
   // 链接点击次数
-  click_count: Number,
+  click_count: {
+    type: Number,
+    default: 0
+  },
   // 是否推荐
-  is_recommend: Boolean,
+  is_recommend: {
+    type: Boolean,
+    default: false
+  },
   // 是否活动
-  is_activity: Boolean,
+  is_activity: {
+    type: Boolean,
+    default: false
+  },
+  // 状态（已上架，已下架）
+  status: String,
+  // 注册数，由甲方提供
+  register_count: {
+    type: Number,
+    default: 0
+  },
   create_at: {
     type: Date,
     default: Date.now

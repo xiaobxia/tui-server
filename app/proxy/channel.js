@@ -42,3 +42,7 @@ exports.check = function (query, opt) {
 exports.count = function (query) {
   return ChannelModel.count(query)
 }
+
+exports.findWithUser = function (query, opt) {
+  return ChannelModel.find(query, {}, opt).populate('user')
+}

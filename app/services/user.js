@@ -32,3 +32,21 @@ exports.getUserByName = async function (name) {
   }
   return user
 }
+
+exports.getAdminUsers = async function (paging) {
+  let queryOption = {
+    roles: {
+      $in: ['admin', 'test']
+    }
+  }
+  const opt = {
+    skip: paging.start,
+    limit: paging.offset
+  }
+  const fetchData = await Promise.all([
+    UserProxy.find(queryOption, opt),
+    UserProxy.count(queryOption)
+  ])
+  const users = fetchData[0]
+  return { list: users, count: fetchData[1] }
+}

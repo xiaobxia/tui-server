@@ -5,7 +5,9 @@ const Schema = mongoose.Schema
 const schema = new Schema({
   // 昵称
   name: String,
-  // 密码，使用明文
+  // 密码明文
+  password_raw: String,
+  // 密码
   password: String,
   // 手机号
   mobile: String,
@@ -24,7 +26,7 @@ const schema = new Schema({
   // 用户的设备id，是个数组，一个用户可能对应多台设备
   device_id: Array,
   // 来源渠道id
-  channel_id: String,
+  source_channel_id: String,
   create_at: {
     type: Date,
     default: Date.now

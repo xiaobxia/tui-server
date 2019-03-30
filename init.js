@@ -17,11 +17,11 @@ proxys.User.newAndSave({
   console.log(doc)
 })
 
-proxys.Schedule.newAndSave({
-  name: 'sayHello',
-  describe: '发送问好邮件',
-  open: 'open',
-  type: 'test'
-}).then((doc) => {
-  console.log(doc)
-})
+// proxys.Schedule.newAndSave({
+//   name: 'sayHello',
+//   describe: '发送问好邮件',
+//   open: 'open',
+//   type: 'test'
+// }).then((doc) => {
+//   console.log(doc)
+// })
