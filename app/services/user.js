@@ -1,4 +1,5 @@
 const Proxy = require('../proxy')
+const md5 = require('md5')
 
 const UserProxy = Proxy.User
 
@@ -49,4 +50,16 @@ exports.getAdminUsers = async function (paging) {
   ])
   const users = fetchData[0]
   return { list: users, count: fetchData[1] }
+}
+
+exports.addAdminUser = async function (data) {
+  return UserProxy.newAndSave({
+    // 昵称
+    name: data.name,
+    // 密码明文
+    password_raw: data.password,
+    // 密码
+    password: md5(data.password),
+    roles: [data.roles]
+  })
 }

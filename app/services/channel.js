@@ -7,12 +7,15 @@ const UserProxy = Proxy.User
 exports.getChannels = async function (query, paging) {
   const opt = {
     skip: paging.start,
-    limit: paging.offset
+    limit: paging.offset,
+    sort: 'status'
   }
   let queryOption = {}
   if (query.channel_name) {
-    const keyExp = new RegExp(query.channel_name, 'i')
-    queryOption = { channel_name: keyExp }
+    queryOption.channel_name = new RegExp(query.channel_name, 'i')
+  }
+  if (query.status) {
+    queryOption.status = query.status
   }
   const fetchData = await Promise.all([
     ChannelProxy.findWithUser(queryOption, opt),
@@ -22,6 +25,11 @@ exports.getChannels = async function (query, paging) {
   return { list, count: fetchData[1] }
 }
 
+exports.getChannelsAll = async function () {
+  const list = await ChannelProxy.find({})
+  return { list }
+}
+
 exports.addChannel = async function (data) {
   const user = await UserProxy.newAndSave({
     // 昵称
@@ -29,7 +37,8 @@ exports.addChannel = async function (data) {
     // 密码明文
     password_raw: data.password,
     // 密码
-    password: md5(data.password)
+    password: md5(data.password),
+    roles: ['channel']
   })
   return ChannelProxy.newAndSave({
     // 渠道的id就是渠道的标识
@@ -51,5 +60,13 @@ exports.deleteChannel = async function (data) {
   })
   return ChannelProxy.delete({
     _id: data.channel_id
+  })
+}
+
+exports.updateChannelStatus = async function (data) {
+  return ChannelProxy.update({
+    _id: data.channel_id
+  }, {
+    status: data.status
   })
 }

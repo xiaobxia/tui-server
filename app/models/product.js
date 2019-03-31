@@ -44,10 +44,18 @@ const schema = new Schema({
     type: Boolean,
     default: false
   },
-  // 状态（已上架，已下架）
-  status: String,
+  // 状态（1已上架，2已下架）
+  status: {
+    type: Number,
+    default: 1
+  },
   // 注册数，由甲方提供
   register_count: {
+    type: Number,
+    default: 0
+  },
+  // 单价
+  unit_price: {
     type: Number,
     default: 0
   },

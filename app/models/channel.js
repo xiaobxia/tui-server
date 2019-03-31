@@ -37,6 +37,21 @@ const schema = new Schema({
     type: Number,
     default: 0
   },
+  // 给渠道看的注册数
+  register_count_c: {
+    type: Number,
+    default: 0
+  },
+  // 单价
+  unit_price: {
+    type: Number,
+    default: 0
+  },
+  // 状态（1已上架，2已下架）
+  status: {
+    type: Number,
+    default: 1
+  },
   create_at: {
     type: Date,
     default: Date.now

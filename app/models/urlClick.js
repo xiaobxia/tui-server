@@ -20,6 +20,6 @@ const schema = new Schema({
 })
 
 // 渠道id设为索引
-schema.index({ channel_id: 1 })
+schema.index({ source_channel_id: 1 })
 
 module.exports = mongoose.model('UrlClick', schema)

@@ -39,5 +39,14 @@ module.exports = {
       { field: 'type' },
       { field: 'value' }
     ]
+  },
+  visitor: {
+    resBase: [
+      { field: '_id', alias: 'visitor_id' },
+      { field: 'device_id' },
+      { field: 'source_channel_id' },
+      { field: 'device_type' },
+      { field: 'create_at' }
+    ]
   }
 }

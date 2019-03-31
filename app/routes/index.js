@@ -78,17 +78,20 @@ router.get('/test/testResponse', controllers.testController.testResponse)
  * 日志模块
  */
 router.post('/log/registerViewLog', controllers.logController.registerViewLog)
+router.get('/log/getRegisterViewLog', controllers.logController.getRegisterViewLog)
 
 /**
  * 后台管理，用户模块
  */
 router.get('/admin/getAdminUsers', controllers.userController.getAdminUsers)
+router.post('/admin/addAdminUser', controllers.userController.addAdminUser)
 
 /**
  * 渠道模块
  */
 router.get('/channel/getChannels', controllers.channelController.getChannels)
+router.get('/channel/getChannelsAll', controllers.channelController.getChannelsAll)
 router.post('/channel/addChannel', controllers.channelController.addChannel)
 router.post('/channel/deleteChannel', controllers.channelController.deleteChannel)
-
+router.post('/channel/updateChannelStatus', controllers.channelController.updateChannelStatus)
 module.exports = router

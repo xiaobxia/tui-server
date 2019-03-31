@@ -7,12 +7,8 @@ const schema = new Schema({
   device_id: String,
   // 来源渠道id
   source_channel_id: String,
-  // 设备类型（iso，安卓，微信）
+  // 设备类型（ios，安卓，微信）
   device_type: String,
-  // 省
-  province: String,
-  // 市
-  city: String,
   create_at: {
     type: Date,
     default: Date.now
@@ -20,6 +16,6 @@ const schema = new Schema({
 })
 
 // 渠道id设为索引
-schema.index({ channel_id: 1 })
+schema.index({ source_channel_id: 1 })
 
 module.exports = mongoose.model('Visitor', schema)

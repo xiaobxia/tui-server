@@ -12,6 +12,21 @@ exports.getAdminUsers = async function (ctx) {
     ctx.body = ctx.refail(err)
   }
 }
+
+exports.addAdminUser = async function (ctx) {
+  const query = ctx.request.body
+  try {
+    const data = ctx.validateData({
+      name: { type: 'string', required: true },
+      password: { type: 'string', required: true },
+      roles: { type: 'string', required: true }
+    }, query)
+    await ctx.services.user.addAdminUser(data)
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
 /**
  * 修改登录密码
  * @param ctx
