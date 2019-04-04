@@ -4,6 +4,8 @@ exports.scheduleController = require('./scheduleController')
 exports.uploadController = require('./uploadController')
 exports.exportController = require('./exportController')
 exports.testController = require('./testController')
+exports.qiniuController = require('./qiniuController')
 
 exports.logController = require('./logController')
 exports.channelController = require('./channelController')
+exports.productController = require('./productController')

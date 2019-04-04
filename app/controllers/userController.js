@@ -27,6 +27,19 @@ exports.addAdminUser = async function (ctx) {
     ctx.body = ctx.refail(err)
   }
 }
+
+exports.deleteAdminUser = async function (ctx) {
+  const query = ctx.request.body
+  try {
+    const data = ctx.validateData({
+      user_id: { type: 'string', required: true }
+    }, query)
+    await ctx.services.user.deleteAdminUser(data)
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
 /**
  * 修改登录密码
  * @param ctx

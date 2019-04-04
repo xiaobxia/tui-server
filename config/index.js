@@ -37,7 +37,10 @@ module.exports = {
   // 阿里云2，用于测试
   db: dbAddress,
   qiniu: {
-    zone: 'Zone_z2'
+    zone: 'Zone_z0',
+    accessKey: 'mE_KVunTNvnBqk70urXj6IPwA7AkF0f7n_ge6ljt',
+    secretKey: 'cuRZJGuJ-FaHanoLznTjEypr-_KIRQZHZAkImZlt',
+    bucketCode: 'tui-info'
   },
   // 邮件配置
   email: {

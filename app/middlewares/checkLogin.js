@@ -1,4 +1,4 @@
-const filterPath = ['/auth', '/schedule', '/test', '/log']
+const filterPath = ['/auth', '/schedule', '/test', '/log', '/customer']
 
 module.exports = async function (ctx, next) {
   const path = ctx.path

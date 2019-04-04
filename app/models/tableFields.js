@@ -2,6 +2,56 @@
  * resBase 非敏感数据，面向用户
  */
 module.exports = {
+  createQueryValidateModel (fieldList) {
+    let validateOption = {}
+    fieldList.map((field) => {
+      validateOption[field.field] = {
+        type: field.type,
+        required: field.required
+      }
+    })
+    return validateOption
+  },
+  createQueryModel (fieldList, queryData) {
+    let validateOption = {}
+    fieldList.map((field) => {
+      if (field.required) {
+        if (field.regExp) {
+          validateOption[field.field] = new RegExp(queryData[field.field], 'i')
+        } else {
+          validateOption[field.field] = queryData[field.field]
+        }
+      } else {
+        if (queryData[field.field] !== undefined) {
+          if (field.regExp) {
+            validateOption[field.field] = new RegExp(queryData[field.field], 'i')
+          } else {
+            validateOption[field.field] = queryData[field.field]
+          }
+        }
+      }
+    })
+    return validateOption
+  },
+  createUpdateValidateModel (fieldList) {
+    let validateOption = {}
+    fieldList.map((field) => {
+      validateOption[field.field] = {
+        type: field.type,
+        required: false
+      }
+    })
+    return validateOption
+  },
+  createUpdateModel (fieldList, updateData) {
+    let data = {}
+    fieldList.map((field) => {
+      if (updateData[field.field] !== undefined) {
+        data[field.field] = updateData[field.field]
+      }
+    })
+    return data
+  },
   user: {
     resBase: [
       { field: '_id', alias: 'user_id' },
@@ -16,10 +66,12 @@ module.exports = {
       { field: 'name' },
       { field: 'describe' },
       { field: 'type' },
-      { field: 'open',
+      {
+        field: 'open',
         format: function (value) {
           return value === 'open'
-        } }
+        }
+      }
     ]
   },
   logAudit: {
@@ -46,7 +98,47 @@ module.exports = {
       { field: 'device_id' },
       { field: 'source_channel_id' },
       { field: 'device_type' },
+      { field: 'page' },
       { field: 'create_at' }
+    ]
+  },
+  urlClick: {
+    resBase: [
+      { field: '_id' },
+      { field: 'device_id' },
+      { field: 'source_channel_id' },
+      { field: 'device_type' },
+      { field: 'mobile' },
+      { field: 'create_at' }
+    ]
+  },
+  product: {
+    query: [
+      { field: 'name', type: 'string', required: false, regExp: true },
+      { field: 'status', type: 'int', required: false },
+      { field: 'is_recommend', type: 'boolean', required: false },
+      { field: 'is_activity', type: 'boolean', required: false }
+    ],
+    update: [
+      { field: 'name', type: 'string' },
+      { field: 'url', type: 'string' },
+      { field: 'icon_url', type: 'string' },
+      { field: 'min_quota', type: 'number' },
+      { field: 'max_quota', type: 'number' },
+      { field: 'min_term', type: 'number' },
+      { field: 'max_term', type: 'number' },
+      { field: 'daily_rate', type: 'number' },
+      { field: 'lending_time', type: 'number' },
+      { field: 'zhi_ma', type: 'number' },
+      { field: 'success_rate', type: 'number' },
+      { field: 'unit_price', type: 'number' },
+      { field: 'status', type: 'number' },
+      { field: 'term_unit', type: 'string' },
+      { field: 'lending_time_unit', type: 'string' },
+      { field: 'is_recommend', type: 'boolean' },
+      { field: 'is_activity', type: 'boolean' },
+      { field: 'today_register_count', type: 'number' },
+      { field: 'history_register_count', type: 'number' }
     ]
   }
 }

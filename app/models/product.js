@@ -21,16 +21,21 @@ const schema = new Schema({
   max_term: Number,
   // 日利率
   daily_rate: Number,
-  // 放款时间单位（分钟，小时）
-  lending_time_unit: Number,
-  // 放款时间
+  // 下款时间单位（分钟，小时，日）
+  lending_time_unit: String,
+  // 下款时间
   lending_time: Number,
   // 芝麻分
   zhi_ma: Number,
   // 成功率
   success_rate: Number,
   // 链接点击次数
-  click_count: {
+  history_click_count: {
+    type: Number,
+    default: 0
+  },
+  // 今日点击次数
+  today_click_count: {
     type: Number,
     default: 0
   },
@@ -49,8 +54,13 @@ const schema = new Schema({
     type: Number,
     default: 1
   },
-  // 注册数，由甲方提供
-  register_count: {
+  // 今日注册数
+  today_register_count: {
+    type: Number,
+    default: 0
+  },
+  // 历史注册数
+  history_register_count: {
     type: Number,
     default: 0
   },

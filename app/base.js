@@ -69,9 +69,9 @@ module.exports = function (app) {
       if (rule.hasOwnProperty(key)) {
         let type = rule[key].type
         if (type === 'int') {
-          fake[key] = data[key] ? parseInt(data[key], 10) : data[key]
+          fake[key] = data[key] ? parseInt(data[key], 10) : (data[key] === 0 ? data[key] : undefined)
         } else if (rule[key].type === 'number') {
-          fake[key] = data[key] ? parseFloat(data[key]) : data[key]
+          fake[key] = data[key] ? parseFloat(data[key]) : (data[key] === 0 ? data[key] : undefined)
         } else {
           if (!type) {
             type = 'string'

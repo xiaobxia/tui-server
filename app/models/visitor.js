@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
-// 游客（用于注册页面，那时还不算用户）
+// 游客
 const schema = new Schema({
   // 设备id
   device_id: String,
@@ -9,6 +9,8 @@ const schema = new Schema({
   source_channel_id: String,
   // 设备类型（ios，安卓，微信）
   device_type: String,
+  // 浏览的页面
+  page: String,
   create_at: {
     type: Date,
     default: Date.now

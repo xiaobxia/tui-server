@@ -63,3 +63,9 @@ exports.addAdminUser = async function (data) {
     roles: [data.roles]
   })
 }
+
+exports.deleteAdminUser = async function (data) {
+  return UserProxy.delete({
+    _id: data.user_id
+  })
+}

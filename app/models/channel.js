@@ -8,37 +8,74 @@ const schema = new Schema({
   // 渠道名
   channel_name: String,
   // 渠道用户浏览注册次数
-  register_view_count: {
+  history_register_view_count: {
+    type: Number,
+    default: 0
+  },
+  today_register_view_count: {
     type: Number,
     default: 0
   },
   // 渠道用户验证码发送次数
-  verification_code_count: {
+  history_verification_code_count: {
+    type: Number,
+    default: 0
+  },
+  today_verification_code_count: {
     type: Number,
     default: 0
   },
   // 渠道用户注册数
-  register_count: {
+  history_register_count: {
+    type: Number,
+    default: 0
+  },
+  today_register_count: {
     type: Number,
     default: 0
   },
   // 渠道用户设备数
-  device_count: {
+  history_device_count: {
+    type: Number,
+    default: 0
+  },
+  today_device_count: {
     type: Number,
     default: 0
   },
   // 渠道用户浏览首页次数
-  home_view_count: {
+  history_home_view_count: {
+    type: Number,
+    default: 0
+  },
+  today_home_view_count: {
+    type: Number,
+    default: 0
+  },
+  // 渠道用户浏览首页次数
+  history_loan_view_count: {
+    type: Number,
+    default: 0
+  },
+  today_loan_view_count: {
     type: Number,
     default: 0
   },
   // 渠道用户点击链接次数
-  click_count: {
+  history_click_count: {
+    type: Number,
+    default: 0
+  },
+  today_click_count: {
     type: Number,
     default: 0
   },
   // 给渠道看的注册数
-  register_count_c: {
+  history_today_register_count_c: {
+    type: Number,
+    default: 0
+  },
+  today_register_count_c: {
     type: Number,
     default: 0
   },

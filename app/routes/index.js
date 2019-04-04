@@ -68,6 +68,8 @@ router.post('/schedule/changeStatus', controllers.scheduleController.changeSched
 router.get('/schedule/all', controllers.scheduleController.getSchedules)
 router.get('/schedule/one', controllers.scheduleController.getSchedule)
 
+router.get('/qiniu/getUploadToken', controllers.qiniuController.getUploadToken)
+
 /**
  * 测试
  */
@@ -77,14 +79,17 @@ router.get('/test/testResponse', controllers.testController.testResponse)
 /**
  * 日志模块
  */
-router.post('/log/registerViewLog', controllers.logController.registerViewLog)
-router.get('/log/getRegisterViewLog', controllers.logController.getRegisterViewLog)
+router.post('/log/addViewLog', controllers.logController.addViewLog)
+router.post('/log/addUrlClickLog', controllers.logController.addUrlClickLog)
+router.get('/log/getViewLog', controllers.logController.getViewLog)
+router.get('/log/getUrlClickLog', controllers.logController.getUrlClickLog)
 
 /**
  * 后台管理，用户模块
  */
 router.get('/admin/getAdminUsers', controllers.userController.getAdminUsers)
 router.post('/admin/addAdminUser', controllers.userController.addAdminUser)
+router.post('/admin/deleteAdminUser', controllers.userController.deleteAdminUser)
 
 /**
  * 渠道模块
@@ -94,4 +99,20 @@ router.get('/channel/getChannelsAll', controllers.channelController.getChannelsA
 router.post('/channel/addChannel', controllers.channelController.addChannel)
 router.post('/channel/deleteChannel', controllers.channelController.deleteChannel)
 router.post('/channel/updateChannelStatus', controllers.channelController.updateChannelStatus)
+
+/**
+ * 产品模块
+ */
+router.get('/product/getProduct', controllers.productController.getProduct)
+router.get('/product/getProducts', controllers.productController.getProducts)
+router.get('/product/getProductsAll', controllers.productController.getProductsAll)
+router.post('/product/addProduct', controllers.productController.addProduct)
+router.post('/product/updateProduct', controllers.productController.updateProduct)
+router.post('/product/updateProductStatus', controllers.productController.updateProductStatus)
+
+/**
+ * 用户产品模块
+ */
+router.get('/customer/getUserProducts', controllers.productController.getUserProducts)
+
 module.exports = router
