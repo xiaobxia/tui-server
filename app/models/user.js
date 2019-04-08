@@ -23,8 +23,8 @@ const schema = new Schema({
   roles: Array,
   // 验证码
   verification_code: String,
-  // 用户的设备id，是个数组，一个用户可能对应多台设备
-  device_id: Array,
+  // 用户的设备id
+  device_id: String,
   // 来源渠道id
   source_channel_id: String,
   create_at: {
@@ -33,7 +33,7 @@ const schema = new Schema({
   }
 })
 // 1升序，-1降序。比如积分一般在排序时越大的在越前面，所以用降序
-// 名字不重复
-schema.index({ name: 1 }, { unique: true })
+// 手机号不重复
+schema.index({ mobile: 1 }, { unique: true })
 
 module.exports = mongoose.model('User', schema)

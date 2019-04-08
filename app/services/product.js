@@ -15,7 +15,7 @@ exports.getProducts = async function (query, paging) {
     limit: paging.offset,
     sort: {
       status: 1,
-      create_at: -1
+      sortIndex: -1
     }
   }
   const productQueryModel = tableFields.createQueryModel(
@@ -33,10 +33,11 @@ exports.getProducts = async function (query, paging) {
   return { list, count: fetchData[1] }
 }
 
-exports.getUserProducts = async function (query, paging) {
+exports.getUserProducts = async function (query) {
   const opt = {
     sort: {
-      is_recommend: -1
+      is_recommend: -1,
+      sortIndex: -1
     }
   }
   const productQueryModel = tableFields.createQueryModel(
@@ -98,4 +99,18 @@ exports.addProductClickLog = async function (data) {
   return ProductProxy.update({
     _id: productId
   }, updateData)
+}
+
+exports.initDayProducts = async function () {
+  const products = await ProductProxy.find({})
+  let list = []
+  products.map((item) => {
+    list.push(ProductProxy.update({
+      _id: item._id
+    }, {
+      today_click_count: item.today_click_count,
+      today_register_count: item.today_register_count
+    }))
+  })
+  return Promise.all(list)
 }

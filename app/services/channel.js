@@ -24,9 +24,19 @@ function isObjectId (id) {
   }
 }
 
-exports.getRealChannelId = async function (id) {
-  if (isObjectId(id)) {
-    return id
+exports.getRealChannelId = async function (data) {
+  // 既没渠道id，又查不到用户的，才计入自然渠道
+  if (data.source_channel_id) {
+    if (isObjectId(data.source_channel_id)) {
+      return data.source_channel_id
+    }
+  } else if (data.mobile) {
+    const user = await UserProxy.findOne({
+      mobile: data.mobile
+    })
+    if (user && user.source_channel_id) {
+      return user.source_channel_id
+    }
   } else {
     const channel = await ChannelProxy.findOne({
       channel_name: '自然渠道'
@@ -148,4 +158,33 @@ exports.addChannelClickCount = async function (data) {
   return ChannelProxy.update({
     _id: channelId
   }, updateData)
+}
+
+exports.updateChannelRegisterC = async function (data) {
+  return ChannelProxy.update({
+    _id: data.channel_id
+  }, {
+    unit_price: data.unit_price,
+    today_register_count_c: data.today_register_count_c
+  })
+}
+
+exports.initDayChannels = async function () {
+  const channels = await ChannelProxy.find({})
+  let list = []
+  channels.map((item) => {
+    list.push(ChannelProxy.update({
+      _id: item._id
+    }, {
+      today_register_view_count: item.today_register_view_count,
+      today_home_view_count: item.today_home_view_count,
+      today_loan_view_count: item.today_loan_view_count,
+      today_verification_code_count: item.today_verification_code_count,
+      today_device_count: item.today_device_count,
+      today_register_count_c: item.today_register_count_c,
+      today_click_count: item.today_click_count,
+      today_register_count: item.today_register_count
+    }))
+  })
+  return Promise.all(list)
 }

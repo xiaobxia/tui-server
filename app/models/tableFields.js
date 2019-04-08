@@ -138,7 +138,9 @@ module.exports = {
       { field: 'is_recommend', type: 'boolean' },
       { field: 'is_activity', type: 'boolean' },
       { field: 'today_register_count', type: 'number' },
-      { field: 'history_register_count', type: 'number' }
+      { field: 'history_register_count', type: 'number' },
+      { field: 'sortIndex', type: 'number' },
+      { field: 'introduction', type: 'string' }
     ]
   }
 }

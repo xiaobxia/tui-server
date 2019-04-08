@@ -65,3 +65,18 @@ exports.updateChannelStatus = async function (ctx) {
     ctx.body = ctx.refail(err)
   }
 }
+
+exports.updateChannelRegisterC = async function (ctx) {
+  const query = ctx.request.body
+  try {
+    const data = ctx.validateData({
+      channel_id: { type: 'string', required: true },
+      unit_price: { type: 'number', required: true },
+      today_register_count_c: { type: 'number', required: true }
+    }, query)
+    await ctx.services.channel.updateChannelRegisterC(data)
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}

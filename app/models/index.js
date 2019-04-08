@@ -34,6 +34,8 @@ exports.Visitor = require('./visitor')
 exports.Product = require('./product')
 exports.Channel = require('./channel')
 exports.UrlClick = require('./urlClick')
+exports.DayProduct = require('./dayProduct')
+exports.DayChannel = require('./dayChannel')
 
 // 字段
 exports.tableFields = require('./tableFields')

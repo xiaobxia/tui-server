@@ -99,6 +99,7 @@ router.get('/channel/getChannelsAll', controllers.channelController.getChannelsA
 router.post('/channel/addChannel', controllers.channelController.addChannel)
 router.post('/channel/deleteChannel', controllers.channelController.deleteChannel)
 router.post('/channel/updateChannelStatus', controllers.channelController.updateChannelStatus)
+router.post('/channel/updateChannelRegisterC', controllers.channelController.updateChannelRegisterC)
 
 /**
  * 产品模块
@@ -114,5 +115,10 @@ router.post('/product/updateProductStatus', controllers.productController.update
  * 用户产品模块
  */
 router.get('/customer/getUserProducts', controllers.productController.getUserProducts)
+
+/**
+ * 任务模块
+ */
+router.get('/schedule/addDay', controllers.scheduleController.addDay)
 
 module.exports = router

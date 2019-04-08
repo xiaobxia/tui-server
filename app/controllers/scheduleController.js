@@ -117,3 +117,15 @@ exports.getSchedule = async function (ctx) {
     ctx.body = ctx.refail(err)
   }
 }
+
+exports.addDay = async function (ctx) {
+  try {
+    await ctx.services.dayChannel.addDayChannel()
+    await ctx.services.dayProduct.addDayProduct()
+    await ctx.services.channel.initDayChannels()
+    await ctx.services.product.initDayProducts()
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}

@@ -3,12 +3,13 @@ exports.addViewLog = async function (ctx) {
   try {
     const data = ctx.validateData({
       device_id: { required: true, type: 'string' },
-      source_channel_id: { required: true, type: 'string' },
       device_type: { required: true, type: 'string' },
-      page: { required: true, type: 'string' }
+      page: { required: true, type: 'string' },
+      source_channel_id: { required: false, type: 'string' },
+      mobile: { required: false, type: 'string' }
     }, query)
     // 添加进游客库， 没必要等待
-    data.source_channel_id = await ctx.services.channel.getRealChannelId(data.source_channel_id)
+    data.source_channel_id = await ctx.services.channel.getRealChannelId(data)
     await ctx.services.channel.addChannelViewCount(data)
     await ctx.services.log.addVisitorLog(data)
     ctx.body = ctx.resuccess()
@@ -43,13 +44,13 @@ exports.addUrlClickLog = async function (ctx) {
   try {
     const data = ctx.validateData({
       device_id: { required: true, type: 'string' },
-      source_channel_id: { required: true, type: 'string' },
       device_type: { required: true, type: 'string' },
       product_id: { required: true, type: 'string' },
+      source_channel_id: { required: false, type: 'string' },
       mobile: { required: false, type: 'string' }
     }, query)
     // 添加进游客库， 没必要等待
-    data.source_channel_id = await ctx.services.channel.getRealChannelId(data.source_channel_id)
+    data.source_channel_id = await ctx.services.channel.getRealChannelId(data)
     await ctx.services.channel.addChannelClickCount(data)
     await ctx.services.log.addUrlClickLog(data)
     ctx.services.product.addProductClickLog(data)

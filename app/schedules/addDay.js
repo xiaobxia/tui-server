@@ -1,4 +1,6 @@
 const schedule = require('node-schedule')
+const reqlib = require('app-root-path').require
+const requestLocal = reqlib('/app/util/requestLocal')
 /**
  * cron风格的
  *    *    *    *    *    *
@@ -13,13 +15,14 @@ const schedule = require('node-schedule')
  */
 let rule = new schedule.RecurrenceRule()
 
-// 每天的23点55分
-rule.hour = 23
-rule.minute = 55
+// 每天的23点
+rule.hour = 22
+rule.minute = 43
 
-function updateProduct () {
+function addDay () {
+  requestLocal.get('schedule/addDay')
 }
 
-const job = schedule.scheduleJob(rule, updateProduct)
+const job = schedule.scheduleJob(rule, addDay)
 
 module.exports = job

@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 // 游客
 const schema = new Schema({
+  // 手机号，有可能为空
+  mobile: String,
   // 设备id
   device_id: String,
   // 来源渠道id

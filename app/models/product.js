@@ -13,7 +13,7 @@ const schema = new Schema({
   min_quota: Number,
   // 最高额度
   max_quota: Number,
-  // 期限单位（日，月，年）
+  // 期限单位（日，周，月，年）
   term_unit: String,
   // 最低期限
   min_term: Number,
@@ -69,10 +69,19 @@ const schema = new Schema({
     type: Number,
     default: 0
   },
+  // 排序索引，越大越靠前
+  sortIndex: {
+    type: Number,
+    default: 100
+  },
+  // 产品简介
+  introduction: String,
   create_at: {
     type: Date,
     default: Date.now
   }
 })
+
+schema.index({ name: 1 }, { unique: true })
 
 module.exports = mongoose.model('Product', schema)
