@@ -30,6 +30,11 @@ const schema = new Schema({
   education_type: String,
   // 芝麻分
   zhima_score: String,
+  // 点击次数
+  click_count: {
+    type: Number,
+    default: 0
+  },
   create_at: {
     type: Date,
     default: Date.now

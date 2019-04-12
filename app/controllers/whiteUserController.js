@@ -24,6 +24,19 @@ exports.addWhiteUser = async function (ctx) {
   }
 }
 
+exports.addClickCount = async function (ctx) {
+  const query = ctx.query
+  try {
+    const data = ctx.validateData({
+      mobile: { type: 'string', required: true }
+    }, query)
+    await ctx.services.whiteUser.addClickCount(data)
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
 exports.getWhiteUsers = async function (ctx) {
   const query = ctx.query
   try {

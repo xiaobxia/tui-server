@@ -28,3 +28,19 @@ exports.getWhiteUsers = async function (paging) {
   const users = fetchData[0]
   return { list: users, count: fetchData[1] }
 }
+
+exports.addClickCount = async function (data) {
+  const user = await WhiteUserProxy.findOne({
+    mobile: data.mobile
+  })
+  if (user) {
+    const mobile = data.mobile
+    return WhiteUserProxy.update({
+      mobile: mobile
+    }, {
+      click_count: user.click_count + 1
+    })
+  } else {
+    return true
+  }
+}
