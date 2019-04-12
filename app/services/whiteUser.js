@@ -15,3 +15,16 @@ exports.addWhiteUser = async function (data) {
     return WhiteUserProxy.newAndSave(data)
   }
 }
+
+exports.getWhiteUsers = async function (paging) {
+  const opt = {
+    skip: paging.start,
+    limit: paging.offset
+  }
+  const fetchData = await Promise.all([
+    WhiteUserProxy.find({}, opt),
+    WhiteUserProxy.count({})
+  ])
+  const users = fetchData[0]
+  return { list: users, count: fetchData[1] }
+}
