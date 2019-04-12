@@ -117,6 +117,16 @@ router.post('/product/updateProductStatus', controllers.productController.update
 router.get('/customer/getUserProducts', controllers.productController.getUserProducts)
 
 /**
+ * 验证码
+ */
+router.get('/auth/getVerificationCodeToken', controllers.authController.getVerificationCodeToken)
+
+/**
+ * 白名单
+ */
+router.get('/log/awu', controllers.whiteUserController.addWhiteUser)
+
+/**
  * 任务模块
  */
 router.get('/schedule/addDay', controllers.scheduleController.addDay)

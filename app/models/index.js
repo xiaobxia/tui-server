@@ -36,6 +36,8 @@ exports.Channel = require('./channel')
 exports.UrlClick = require('./urlClick')
 exports.DayProduct = require('./dayProduct')
 exports.DayChannel = require('./dayChannel')
+exports.VcToken = require('./vcToken')
+exports.WhiteUser = require('./whiteUser')
 
 // 字段
 exports.tableFields = require('./tableFields')

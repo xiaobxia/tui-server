@@ -1,3 +1,4 @@
+const uuidv1 = require('uuid/v1')
 const Proxy = require('../proxy')
 const tableFields = require('../models/tableFields')
 const formatUtil = require('../util/format')
@@ -7,6 +8,7 @@ const VisitorProxy = Proxy.Visitor
 const ChannelProxy = Proxy.Channel
 const UrlClickProxy = Proxy.UrlClick
 const ProductProxy = Proxy.Product
+const VcTokenProxy = Proxy.VcToken
 
 function formatChannelName (listItem, channels) {
   const sourceChannelId = listItem.source_channel_id
@@ -139,4 +141,12 @@ exports.getUrlClickLog = async function (data, paging) {
     })
   }
   return { list: newList, count: fetchData[1] }
+}
+
+exports.addVerificationCodeToken = async function () {
+  let data = {
+    token: uuidv1(),
+    status: 1
+  }
+  return VcTokenProxy.newAndSave(data)
 }

@@ -125,3 +125,28 @@ exports.logout = async function (ctx) {
     ctx.body = ctx.refail(err)
   }
 }
+
+exports.getVerificationCodeToken = async function (ctx) {
+  try {
+    const res = await ctx.services.log.addVerificationCodeToken()
+    // 发送次数客户端也需要验证
+    ctx.body = ctx.resuccess(res)
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
+exports.sendVerificationCode = async function (ctx) {
+  const query = ctx.query
+  try {
+    const data = ctx.validateData({
+      token: { required: true, type: 'string' },
+      mobile: { required: true, type: 'string' }
+    }, query)
+    const res = await ctx.services.auth.sendVerificationCode(data)
+    // 发送次数客户端也需要验证
+    ctx.body = ctx.resuccess(res)
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}

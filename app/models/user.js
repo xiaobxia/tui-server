@@ -23,6 +23,8 @@ const schema = new Schema({
   roles: Array,
   // 验证码
   verification_code: String,
+  // 上次发送验证码时间
+  verification_code_last_time: Date,
   // 用户的设备id
   device_id: String,
   // 来源渠道id
