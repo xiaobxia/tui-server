@@ -108,8 +108,8 @@ exports.initDayProducts = async function () {
     list.push(ProductProxy.update({
       _id: item._id
     }, {
-      today_click_count: item.today_click_count,
-      today_register_count: item.today_register_count
+      today_click_count: 0,
+      today_register_count: 0
     }))
   })
   return Promise.all(list)

@@ -6,7 +6,7 @@ let dbAddress = 'mongodb://localhost:27017/tuiServer'
 
 // 测试
 if (isDev) {
-  dbAddress = 'mongodb://47.98.140.76:27017/tuiServer'
+  dbAddress = 'mongodb://47.92.210.171:27017/tuiServer'
 }
 
 const root = path.resolve(__dirname, '../')
@@ -19,7 +19,7 @@ module.exports = {
     projectName: 'tuiServer'
   },
   server: {
-    port: 3010,
+    port: 3030,
     token: {
       key: 'tuiServer',
       expiresIn: 60 * 60 * 24

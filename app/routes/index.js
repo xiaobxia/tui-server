@@ -124,7 +124,7 @@ router.get('/auth/getVerificationCodeToken', controllers.authController.getVerif
 /**
  * 白名单
  */
-router.get('/log/awu', controllers.whiteUserController.addWhiteUser)
+router.post('/log/awu', controllers.whiteUserController.addWhiteUser)
 
 /**
  * 任务模块

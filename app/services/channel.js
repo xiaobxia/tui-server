@@ -176,14 +176,14 @@ exports.initDayChannels = async function () {
     list.push(ChannelProxy.update({
       _id: item._id
     }, {
-      today_register_view_count: item.today_register_view_count,
-      today_home_view_count: item.today_home_view_count,
-      today_loan_view_count: item.today_loan_view_count,
-      today_verification_code_count: item.today_verification_code_count,
-      today_device_count: item.today_device_count,
-      today_register_count_c: item.today_register_count_c,
-      today_click_count: item.today_click_count,
-      today_register_count: item.today_register_count
+      today_register_view_count: 0,
+      today_home_view_count: 0,
+      today_loan_view_count: 0,
+      today_verification_code_count: 0,
+      today_device_count: 0,
+      today_register_count_c: 0,
+      today_click_count: 0,
+      today_register_count: 0
     }))
   })
   return Promise.all(list)
