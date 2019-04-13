@@ -38,7 +38,7 @@ exports.addClickCount = async function (data) {
     return WhiteUserProxy.update({
       mobile: mobile
     }, {
-      click_count: user.click_count + 1
+      click_count: (user.click_count || 0) + 1
     })
   } else {
     return true
