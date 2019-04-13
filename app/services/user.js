@@ -69,3 +69,21 @@ exports.deleteAdminUser = async function (data) {
     _id: data.user_id
   })
 }
+
+exports.addClickCount = async function (data) {
+  const mobile = data.mobile
+  if (!mobile) {
+    return false
+  }
+  const user = await UserProxy.findOne({
+    mobile: mobile
+  })
+  if (!user) {
+    return false
+  }
+  let updateData = {}
+  updateData.click_count = (user.click_count || 0) + 1
+  return UserProxy.update({
+    mobile: mobile
+  }, updateData)
+}

@@ -29,6 +29,10 @@ const schema = new Schema({
   device_id: String,
   // 来源渠道id
   source_channel_id: String,
+  click_count: {
+    type: Number,
+    default: 0
+  },
   create_at: {
     type: Date,
     default: Date.now

@@ -54,6 +54,7 @@ exports.addUrlClickLog = async function (ctx) {
     await ctx.services.channel.addChannelClickCount(data)
     await ctx.services.log.addUrlClickLog(data)
     ctx.services.product.addProductClickLog(data)
+    ctx.services.user.addClickCount(data)
     ctx.body = ctx.resuccess()
   } catch (err) {
     ctx.body = ctx.refail(err)
