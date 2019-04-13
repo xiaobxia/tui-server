@@ -14,10 +14,12 @@ exports.getDayChannelSingles = async function (ctx) {
       ...data
     }, paging)
     const list = []
-    res.list.map((item)=>{
+    res.list.map((item) => {
       list.push({
         channel_id: item.channel_id,
-        channel_name: item.channel_name
+        channel_name: item.channel_name,
+        day: item.day,
+        register_count: item.register_count_c
       })
     })
     res.list = list
