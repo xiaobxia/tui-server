@@ -7,6 +7,11 @@ const schema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   // 渠道名
   channel_name: String,
+  // 扣量基数
+  deduction_base: {
+    type: Number,
+    default: 1
+  },
   // 渠道用户浏览注册次数
   history_register_view_count: {
     type: Number,

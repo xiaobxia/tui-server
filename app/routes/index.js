@@ -134,4 +134,9 @@ router.get('/schedule/addDay', controllers.scheduleController.addDay)
 router.get('/schedule/addNewDay', controllers.scheduleController.addNewDay)
 router.get('/schedule/updateDayData', controllers.scheduleController.updateDayData)
 
+/**
+ * 代理商部分
+ */
+router.get('/agent/rg', controllers.dayChannelSingleController.getDayChannelSingles)
+
 module.exports = router
