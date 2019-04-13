@@ -129,3 +129,23 @@ exports.addDay = async function (ctx) {
     ctx.body = ctx.refail(err)
   }
 }
+
+exports.addNewDay = async function (ctx) {
+  try {
+    await ctx.services.dayProductSingle.addDayProductSingle()
+    await ctx.services.dayChannelSingle.addDayChannelSingle()
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
+exports.updateDayData = async function (ctx) {
+  try {
+    await ctx.services.dayProductSingle.updateDayData()
+    await ctx.services.dayChannelSingle.updateDayData()
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}

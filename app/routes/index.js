@@ -131,5 +131,7 @@ router.get('/whiteUser/getWhiteUsers', controllers.whiteUserController.getWhiteU
  * 任务模块
  */
 router.get('/schedule/addDay', controllers.scheduleController.addDay)
+router.get('/schedule/addNewDay', controllers.scheduleController.addNewDay)
+router.get('/schedule/updateDayData', controllers.scheduleController.updateDayData)
 
 module.exports = router

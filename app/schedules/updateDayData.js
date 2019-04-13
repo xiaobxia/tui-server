@@ -15,13 +15,16 @@ const requestLocal = reqlib('/app/util/requestLocal')
  */
 let rule = new schedule.RecurrenceRule()
 
-rule.hour = 23
-rule.minute = 55
+let minute = []
+for (let k = 10; k < 60; k += 10) {
+  minute.push(k)
+}
+rule.minute = minute
 
-function addDay () {
-  requestLocal.get('schedule/addDay')
+function updateDayData () {
+  requestLocal.get('schedule/updateDayData')
 }
 
-const job = schedule.scheduleJob(rule, addDay)
+const job = schedule.scheduleJob(rule, updateDayData)
 
 module.exports = job
