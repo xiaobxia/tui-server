@@ -39,7 +39,8 @@ exports.addDayChannelSingle = async function () {
   const channels = await ChannelProxy.find({})
   let opList = []
   const day = moment().format('YYYY-MM-DD')
-  channels.map((item) => {
+  for (let i = 0; i < channels.length; i++) {
+    const item = channels[i]
     opList.push(DayChannelSingle.newAndSave({
       day: day,
       channel_id: item._id,
@@ -55,7 +56,7 @@ exports.addDayChannelSingle = async function () {
       unit_price: item.unit_price,
       status: item.status
     }))
-  })
+  }
   return Promise.all(opList)
 }
 
@@ -63,7 +64,8 @@ exports.updateDayData = async function () {
   const channels = await ChannelProxy.find({})
   let opList = []
   const day = moment().format('YYYY-MM-DD')
-  channels.map(async (item) => {
+  for (let i = 0; i < channels.length; i++) {
+    const item = channels[i]
     const dayChannelSingle = await DayChannelSingle.findOne({
       day: day,
       channel_id: item._id
@@ -102,6 +104,6 @@ exports.updateDayData = async function () {
         status: item.status
       }))
     }
-  })
+  }
   return Promise.all(opList)
 }

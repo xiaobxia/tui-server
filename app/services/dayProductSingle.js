@@ -8,7 +8,8 @@ exports.addDayProductSingle = async function () {
   const products = await ProductProxy.find({})
   let opList = []
   const day = moment().format('YYYY-MM-DD')
-  products.map((item) => {
+  for (let i = 0; i < products.length; i++) {
+    const item = products[i]
     opList.push(DayProductSingle.newAndSave({
       day: day,
       product_id: item._id,
@@ -18,7 +19,7 @@ exports.addDayProductSingle = async function () {
       unit_price: item.unit_price,
       status: item.status
     }))
-  })
+  }
   return Promise.all(opList)
 }
 
@@ -26,7 +27,8 @@ exports.updateDayData = async function () {
   const products = await ProductProxy.find({})
   let opList = []
   const day = moment().format('YYYY-MM-DD')
-  products.map(async (item) => {
+  for (let i = 0; i < products.length; i++) {
+    const item = products[i]
     const dayProductSingle = await DayProductSingle.findOne({
       day: day,
       product_id: item._id
@@ -53,6 +55,6 @@ exports.updateDayData = async function () {
         status: item.status
       }))
     }
-  })
+  }
   return Promise.all(opList)
 }
