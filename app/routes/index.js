@@ -120,6 +120,7 @@ router.get('/customer/getUserProducts', controllers.productController.getUserPro
  * 验证码
  */
 router.get('/auth/getVerificationCodeToken', controllers.authController.getVerificationCodeToken)
+router.get('/auth/sendVerificationCode', controllers.authController.sendVerificationCode)
 
 /**
  * 白名单

@@ -87,3 +87,21 @@ exports.addClickCount = async function (data) {
     mobile: mobile
   }, updateData)
 }
+
+exports.addViewCount = async function (data) {
+  const mobile = data.mobile
+  if (!mobile) {
+    return false
+  }
+  const user = await UserProxy.findOne({
+    mobile: mobile
+  })
+  if (!user) {
+    return false
+  }
+  let updateData = {}
+  updateData.view_count = (user.view_count || 0) + 1
+  return UserProxy.update({
+    mobile: mobile
+  }, updateData)
+}

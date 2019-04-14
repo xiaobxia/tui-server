@@ -16,14 +16,25 @@ exports.addWhiteUser = async function (data) {
   }
 }
 
-exports.getWhiteUsers = async function (paging) {
+exports.getWhiteUsers = async function (query, paging) {
   const opt = {
     skip: paging.start,
-    limit: paging.offset
+    limit: paging.offset,
+    // 点击数多的靠前
+    sort: {
+      click_count: -1
+    }
   }
+  let queryOption = {}
+  if (query.if_contact === 'true') {
+    queryOption.if_contact = true
+  } else if (query.if_contact === 'false') {
+    queryOption.if_contact = false
+  }
+  console.log(queryOption)
   const fetchData = await Promise.all([
-    WhiteUserProxy.find({}, opt),
-    WhiteUserProxy.count({})
+    WhiteUserProxy.find(queryOption, opt),
+    WhiteUserProxy.count(queryOption)
   ])
   const users = fetchData[0]
   return { list: users, count: fetchData[1] }

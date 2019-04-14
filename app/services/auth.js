@@ -2,6 +2,7 @@ const Proxy = require('../proxy')
 
 const UserProxy = Proxy.User
 const VcTokenProxy = Proxy.VcToken
+const ChannelProxy = Proxy.Channel
 
 /**
  * 登录
@@ -44,13 +45,26 @@ exports.sendVerificationCode = async function (data) {
     throw new Error('发送异常')
   }
   // TODO发送验证码
-  const code = Math.round().toFixed(4).toString().split('.')[1]
-  const user = UserProxy.findOne({
-    mobile: data.mobile
+  const code = Math.random().toFixed(4).toString().split('.')[1]
+  const fData = await Promise.all([
+    ChannelProxy.findOne({
+      _id: data.source_channel_id
+    }),
+    UserProxy.findOne({
+      mobile: data.mobile
+    })
+  ])
+  const channel = fData[0]
+  const user = fData[1]
+  // 更新渠道验证码发送统计
+  await ChannelProxy.update({
+    _id: data.source_channel_id
+  }, {
+    today_verification_code_count: channel.today_verification_code_count + 1
   })
   // 是否提交过
   if (user) {
-    UserProxy.update({
+    await UserProxy.update({
       mobile: data.mobile
     }, {
       verification_code: code,
@@ -58,16 +72,20 @@ exports.sendVerificationCode = async function (data) {
       verification_code_last_time: Date.now()
     })
   } else {
-    UserProxy.newAndSave({
+    await UserProxy.newAndSave({
       mobile: data.mobile,
+      // 未激活，确定点击注册了才算激活
+      status: 2,
+      // 用户
+      roles: ['user'],
+      source_channel_id: data.source_channel_id,
       verification_code: code,
       // 上次发送验证码时间
       verification_code_last_time: Date.now()
     })
   }
-
-  // 删除
-  VcTokenProxy.delete({
+  // 删除token
+  return VcTokenProxy.delete({
     token: data.token
   })
 }

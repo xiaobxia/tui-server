@@ -12,6 +12,7 @@ exports.addViewLog = async function (ctx) {
     data.source_channel_id = await ctx.services.channel.getRealChannelId(data)
     await ctx.services.channel.addChannelViewCount(data)
     await ctx.services.log.addVisitorLog(data)
+    await ctx.services.user.addViewCount(data)
     ctx.body = ctx.resuccess()
   } catch (err) {
     ctx.body = ctx.refail(err)

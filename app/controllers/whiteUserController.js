@@ -42,10 +42,11 @@ exports.getWhiteUsers = async function (ctx) {
   try {
     const data = ctx.validateData({
       current: { type: 'int', required: true },
-      pageSize: { type: 'int', required: true }
+      pageSize: { type: 'int', required: true },
+      if_contact: { type: 'string', required: false }
     }, query)
     let paging = ctx.paging(data.current, data.pageSize)
-    const users = await ctx.services.whiteUser.getWhiteUsers(paging)
+    const users = await ctx.services.whiteUser.getWhiteUsers(data, paging)
     ctx.body = ctx.resuccess(users)
   } catch (err) {
     ctx.body = ctx.refail(err)

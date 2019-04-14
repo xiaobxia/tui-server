@@ -30,6 +30,10 @@ exports.getRealChannelId = async function (data) {
     if (isObjectId(data.source_channel_id)) {
       return data.source_channel_id
     }
+    const channel = await ChannelProxy.findOne({
+      channel_name: '自然渠道'
+    })
+    return channel._id
   } else if (data.mobile) {
     const user = await UserProxy.findOne({
       mobile: data.mobile
@@ -37,6 +41,10 @@ exports.getRealChannelId = async function (data) {
     if (user && user.source_channel_id) {
       return user.source_channel_id
     }
+    const channel = await ChannelProxy.findOne({
+      channel_name: '自然渠道'
+    })
+    return channel._id
   } else {
     const channel = await ChannelProxy.findOne({
       channel_name: '自然渠道'

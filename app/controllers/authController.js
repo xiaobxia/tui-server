@@ -142,8 +142,27 @@ exports.sendVerificationCode = async function (ctx) {
   try {
     const data = ctx.validateData({
       token: { required: true, type: 'string' },
-      mobile: { required: true, type: 'string' }
+      mobile: { required: true, type: 'string' },
+      source_channel_id: { required: true, type: 'string' }
     }, query)
+    data.source_channel_id = await ctx.services.channel.getRealChannelId(data)
+    const res = await ctx.services.auth.sendVerificationCode(data)
+    // 发送次数客户端也需要验证
+    ctx.body = ctx.resuccess(res)
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
+exports.activeByVerificationCode = async function (ctx) {
+  const query = ctx.request.body
+  try {
+    const data = ctx.validateData({
+      code: { required: true, type: 'string' },
+      mobile: { required: true, type: 'string' },
+      source_channel_id: { required: true, type: 'string' }
+    }, query)
+    data.source_channel_id = await ctx.services.channel.getRealChannelId(data)
     const res = await ctx.services.auth.sendVerificationCode(data)
     // 发送次数客户端也需要验证
     ctx.body = ctx.resuccess(res)

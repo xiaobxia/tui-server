@@ -35,6 +35,10 @@ const schema = new Schema({
     type: Number,
     default: 0
   },
+  if_contact: {
+    type: Boolean,
+    default: false
+  },
   create_at: {
     type: Date,
     default: Date.now

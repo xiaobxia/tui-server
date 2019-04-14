@@ -2,6 +2,7 @@ const filterPath = ['/auth', '/schedule', '/test', '/log', '/customer']
 
 module.exports = async function (ctx, next) {
   const path = ctx.path
+  console.log(path)
   const projectName = ctx.localConfig.project.projectName
   let ifFilter = false
   for (let k = 0; k < filterPath.length; k++) {
