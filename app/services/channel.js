@@ -180,10 +180,19 @@ exports.updateChannelRegisterC = async function (data) {
 exports.initDayChannels = async function () {
   const channels = await ChannelProxy.find({})
   let list = []
-  channels.map((item) => {
+  for (let i = 0; i < channels.length; i++) {
+    const item = channels[i]
     list.push(ChannelProxy.update({
       _id: item._id
     }, {
+      history_register_view_count: item.history_register_view_count + item.today_register_view_count,
+      history_home_view_count: item.history_home_view_count + item.today_home_view_count,
+      history_loan_view_count: item.history_loan_view_count + item.today_loan_view_count,
+      history_verification_code_count: item.history_verification_code_count + item.today_verification_code_count,
+      history_device_count: item.history_device_count + item.today_device_count,
+      history_register_count_c: item.history_register_count_c + item.today_register_count_c,
+      history_click_count: item.history_click_count + item.today_click_count,
+      history_register_count: item.history_register_count + item.today_register_count,
       today_register_view_count: 0,
       today_home_view_count: 0,
       today_loan_view_count: 0,
@@ -193,6 +202,6 @@ exports.initDayChannels = async function () {
       today_click_count: 0,
       today_register_count: 0
     }))
-  })
+  }
   return Promise.all(list)
 }

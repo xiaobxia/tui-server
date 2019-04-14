@@ -140,4 +140,9 @@ router.get('/schedule/updateDayData', controllers.scheduleController.updateDayDa
  */
 router.get('/agent/rg', controllers.dayChannelSingleController.getDayChannelSingles)
 
+/**
+ * 客户部分
+ */
+router.get('/user/getCustomers', controllers.customerController.getCustomers)
+
 module.exports = router

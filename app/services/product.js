@@ -104,13 +104,16 @@ exports.addProductClickLog = async function (data) {
 exports.initDayProducts = async function () {
   const products = await ProductProxy.find({})
   let list = []
-  products.map((item) => {
+  for (let i = 0; i < products.length; i++) {
+    const item = products[i]
     list.push(ProductProxy.update({
       _id: item._id
     }, {
+      history_click_count: item.history_click_count + item.today_click_count,
+      history_register_count: item.history_register_count + item.today_register_count,
       today_click_count: 0,
       today_register_count: 0
     }))
-  })
+  }
   return Promise.all(list)
 }

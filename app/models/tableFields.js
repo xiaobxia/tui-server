@@ -142,5 +142,15 @@ module.exports = {
       { field: 'sortIndex', type: 'number' },
       { field: 'introduction', type: 'string' }
     ]
+  },
+  customer: {
+    resBase: [
+      { field: '_id' },
+      { field: 'status' },
+      { field: 'source_channel_id' },
+      { field: 'verification_code' },
+      { field: 'mobile' },
+      { field: 'create_at' }
+    ]
   }
 }

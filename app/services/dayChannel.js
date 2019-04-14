@@ -23,8 +23,20 @@ exports.addDayChannel = async function () {
       status: item.status
     })
   })
-  return DayChannelProxy.newAndSave({
-    day: moment().format('YYYY-MM-DD'),
-    detailList
+  const day = moment().format('YYYY-MM-DD')
+  const dayChannel = await DayChannelProxy.findOne({
+    day: day
   })
+  if (dayChannel) {
+    return DayChannelProxy.update({
+      day: moment().format('YYYY-MM-DD')
+    }, {
+      detailList
+    })
+  } else {
+    return DayChannelProxy.newAndSave({
+      day: moment().format('YYYY-MM-DD'),
+      detailList
+    })
+  }
 }

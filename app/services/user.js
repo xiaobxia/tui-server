@@ -1,7 +1,24 @@
 const Proxy = require('../proxy')
 const md5 = require('md5')
+const tableFields = require('../models/tableFields')
+const formatUtil = require('../util/format')
 
 const UserProxy = Proxy.User
+const ChannelProxy = Proxy.Channel
+
+function formatChannelName (listItem, channels) {
+  const sourceChannelId = listItem.source_channel_id
+  let channelName = ''
+  channels.map((channel) => {
+    if (channel._id.toString() === sourceChannelId) {
+      channelName = channel.channel_name
+    }
+  })
+  if (channelName === '') {
+    return '自然渠道'
+  }
+  return channelName
+}
 
 /**
  * 修改用户密码
@@ -104,4 +121,47 @@ exports.addViewCount = async function (data) {
   return UserProxy.update({
     mobile: mobile
   }, updateData)
+}
+
+exports.getCustomers = async function (query, paging) {
+  const opt = {
+    skip: paging.start,
+    limit: paging.offset,
+    sort: {
+      create_at: -1
+    }
+  }
+  let queryOption = {
+    roles: {
+      $in: ['user']
+    }
+  }
+  if (query.source_channel_id) {
+    queryOption.source_channel_id = query.source_channel_id
+  }
+  if (query.status) {
+    queryOption.status = query.status
+  }
+  if (query.beginTime) {
+    queryOption.create_at = {
+      $gte: query.beginTime,
+      $lt: query.endTime
+    }
+  }
+  const fetchData = await Promise.all([
+    UserProxy.find(queryOption, opt),
+    UserProxy.count(queryOption)
+  ])
+  const list = fetchData[0]
+  let newList = []
+  if (list.length > 0) {
+    const channels = await ChannelProxy.find({})
+    list.map((listItem) => {
+      newList.push({
+        ...formatUtil.formatFields(tableFields.customer.resBase, listItem),
+        source_channel_name: formatChannelName(listItem, channels)
+      })
+    })
+  }
+  return { list: newList, count: fetchData[1] }
 }

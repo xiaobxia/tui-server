@@ -17,8 +17,20 @@ exports.addDayProduct = async function () {
       status: item.status
     })
   })
-  return DayProductProxy.newAndSave({
-    day: moment().format('YYYY-MM-DD'),
-    detailList
+  const day = moment().format('YYYY-MM-DD')
+  const dayProduct = await DayProductProxy.findOne({
+    day: day
   })
+  if (dayProduct) {
+    return DayProductProxy.update({
+      day: moment().format('YYYY-MM-DD')
+    }, {
+      detailList
+    })
+  } else {
+    return DayProductProxy.newAndSave({
+      day: moment().format('YYYY-MM-DD'),
+      detailList
+    })
+  }
 }
