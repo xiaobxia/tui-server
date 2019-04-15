@@ -98,6 +98,7 @@ module.exports = {
       { field: 'device_id' },
       { field: 'source_channel_id' },
       { field: 'device_type' },
+      { field: 'mobile' },
       { field: 'page' },
       { field: 'create_at' }
     ]
@@ -150,6 +151,9 @@ module.exports = {
       { field: 'source_channel_id' },
       { field: 'verification_code' },
       { field: 'mobile' },
+      { field: 'click_count' },
+      { field: 'brisk_count' },
+      { field: 'last_brisk_day' },
       { field: 'create_at' }
     ]
   }

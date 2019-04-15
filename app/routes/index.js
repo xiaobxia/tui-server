@@ -115,12 +115,17 @@ router.post('/product/updateProductStatus', controllers.productController.update
  * 用户产品模块
  */
 router.get('/customer/getUserProducts', controllers.productController.getUserProducts)
+router.get('/customer/getProductsNew', controllers.productController.getProductsNew)
+router.get('/customer/getProductsQuick', controllers.productController.getProductsQuick)
+router.get('/customer/getProductsHot', controllers.productController.getProductsHot)
+router.get('/customer/getProductsBig', controllers.productController.getProductsBig)
 
 /**
  * 验证码
  */
 router.get('/auth/getVerificationCodeToken', controllers.authController.getVerificationCodeToken)
 router.get('/auth/sendVerificationCode', controllers.authController.sendVerificationCode)
+router.post('/auth/activeByVerificationCode', controllers.authController.activeByVerificationCode)
 
 /**
  * 白名单

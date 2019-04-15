@@ -1,4 +1,5 @@
 const Proxy = require('../proxy')
+const moment = require('moment')
 const tableFields = require('../models/tableFields')
 
 const ProductProxy = Proxy.Product
@@ -116,4 +117,73 @@ exports.initDayProducts = async function () {
     }))
   }
   return Promise.all(list)
+}
+
+exports.getProductsNew = async function () {
+  const opt = {
+    sort: {
+      create_at: -1
+    }
+  }
+  let queryOption = {
+    // 最近10天
+    'create_at': {
+      $gte: moment().subtract(10, 'days')
+    }
+  }
+  const fetchData = await Promise.all([
+    ProductProxy.find(queryOption, opt),
+    ProductProxy.count(queryOption)
+  ])
+  const list = fetchData[0]
+  return { list, count: fetchData[1] }
+}
+
+exports.getProductsQuick = async function () {
+  const opt = {
+    sort: {
+      lending_time: 1
+    }
+  }
+  let queryOption = {
+    'lending_time': {
+      $lt: 40
+    }
+  }
+  const fetchData = await Promise.all([
+    ProductProxy.find(queryOption, opt),
+    ProductProxy.count(queryOption)
+  ])
+  const list = fetchData[0]
+  return { list, count: fetchData[1] }
+}
+
+exports.getProductsHot = async function () {
+  const opt = {
+    sort: {
+      history_click_count: -1
+    }
+  }
+  let queryOption = {}
+  const fetchData = await Promise.all([
+    ProductProxy.find(queryOption, opt),
+    ProductProxy.count(queryOption)
+  ])
+  const list = fetchData[0]
+  return { list, count: fetchData[1] }
+}
+
+exports.getProductsBig = async function () {
+  const opt = {
+    sort: {
+      max_quota: -1
+    }
+  }
+  let queryOption = {}
+  const fetchData = await Promise.all([
+    ProductProxy.find(queryOption, opt),
+    ProductProxy.count(queryOption)
+  ])
+  const list = fetchData[0]
+  return { list, count: fetchData[1] }
 }

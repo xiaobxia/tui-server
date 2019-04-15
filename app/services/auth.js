@@ -89,3 +89,33 @@ exports.sendVerificationCode = async function (data) {
     token: data.token
   })
 }
+
+exports.activeByVerificationCode = async function (data) {
+  const user = await UserProxy.findOne({
+    mobile: data.mobile
+  })
+  if (!user) {
+    throw new Error('验证码不正确')
+  }
+  if (user.verification_code === data.code) {
+    if (user.status === 2) {
+      await UserProxy.update({
+        mobile: data.mobile
+      }, {
+        status: 1
+      })
+      const channel = await ChannelProxy.findOne({
+        _id: data.source_channel_id
+      })
+      return ChannelProxy.update({
+        _id: data.source_channel_id
+      }, {
+        today_register_count: channel.today_register_count + 1
+      })
+    } else {
+      return true
+    }
+  } else {
+    throw new Error('验证码不正确')
+  }
+}

@@ -43,7 +43,8 @@ exports.addProduct = async function (ctx) {
     const data = ctx.validateData({
       name: { type: 'string', required: true },
       url: { type: 'string', required: true },
-      unit_price: { type: 'number', required: true }
+      unit_price: { type: 'number', required: true },
+      introduction: { type: 'string', required: true }
     }, query)
     await ctx.services.product.addProduct(data)
     ctx.body = ctx.resuccess()
@@ -97,6 +98,42 @@ exports.getUserProducts = async function (ctx) {
 exports.getProductsAll = async function (ctx) {
   try {
     const products = await ctx.services.product.getProductsAll()
+    ctx.body = ctx.resuccess(products)
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
+exports.getProductsNew = async function (ctx) {
+  try {
+    const products = await ctx.services.product.getProductsNew()
+    ctx.body = ctx.resuccess(products)
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
+exports.getProductsQuick = async function (ctx) {
+  try {
+    const products = await ctx.services.product.getProductsQuick()
+    ctx.body = ctx.resuccess(products)
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
+exports.getProductsHot = async function (ctx) {
+  try {
+    const products = await ctx.services.product.getProductsHot()
+    ctx.body = ctx.resuccess(products)
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
+exports.getProductsBig = async function (ctx) {
+  try {
+    const products = await ctx.services.product.getProductsBig()
     ctx.body = ctx.resuccess(products)
   } catch (err) {
     ctx.body = ctx.refail(err)

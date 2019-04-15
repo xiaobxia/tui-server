@@ -31,7 +31,6 @@ exports.getWhiteUsers = async function (query, paging) {
   } else if (query.if_contact === 'false') {
     queryOption.if_contact = false
   }
-  console.log(queryOption)
   const fetchData = await Promise.all([
     WhiteUserProxy.find(queryOption, opt),
     WhiteUserProxy.count(queryOption)

@@ -76,7 +76,7 @@ const schema = new Schema({
     default: 0
   },
   // 给渠道看的注册数
-  history_today_register_count_c: {
+  history_register_count_c: {
     type: Number,
     default: 0
   },

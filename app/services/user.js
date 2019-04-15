@@ -1,4 +1,5 @@
 const Proxy = require('../proxy')
+const moment = require('moment')
 const md5 = require('md5')
 const tableFields = require('../models/tableFields')
 const formatUtil = require('../util/format')
@@ -117,6 +118,11 @@ exports.addViewCount = async function (data) {
     return false
   }
   let updateData = {}
+  const day = moment().format('YYYY-MM-DD')
+  if (user.last_brisk_day !== day) {
+    updateData.last_brisk_day = day
+    updateData.brisk_count = user.brisk_count + 1
+  }
   updateData.view_count = (user.view_count || 0) + 1
   return UserProxy.update({
     mobile: mobile

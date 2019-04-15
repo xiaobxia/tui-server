@@ -29,13 +29,13 @@ exports.addDayChannel = async function () {
   })
   if (dayChannel) {
     return DayChannelProxy.update({
-      day: moment().format('YYYY-MM-DD')
+      day: day
     }, {
       detailList
     })
   } else {
     return DayChannelProxy.newAndSave({
-      day: moment().format('YYYY-MM-DD'),
+      day: day,
       detailList
     })
   }
