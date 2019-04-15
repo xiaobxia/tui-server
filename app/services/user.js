@@ -118,11 +118,18 @@ exports.addViewCount = async function (data) {
     return false
   }
   let updateData = {}
-  const day = moment().format('YYYY-MM-DD')
-  if (user.last_brisk_day !== day) {
-    updateData.last_brisk_day = day
+  // 活跃度统计，隔两小时后还愿意进入，就记一次
+  if (user.last_brisk_day) {
+    const diff = moment().diff(user.last_brisk_day, 'hours')
+    if (diff >= 2) {
+      updateData.last_brisk_day = moment().format('YYYY-MM-DD HH:mm:ss')
+      updateData.brisk_count = user.brisk_count + 1
+    }
+  } else {
+    updateData.last_brisk_day = moment().format('YYYY-MM-DD HH:mm:ss')
     updateData.brisk_count = user.brisk_count + 1
   }
+  // 页面浏览次数统计
   updateData.view_count = (user.view_count || 0) + 1
   return UserProxy.update({
     mobile: mobile

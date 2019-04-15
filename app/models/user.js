@@ -37,12 +37,12 @@ const schema = new Schema({
     type: Number,
     default: 0
   },
-  // 活跃天数
+  // 活跃度
   brisk_count: {
     type: Number,
     default: 0
   },
-  // 上次活跃日期
+  // 上次活跃时间
   last_brisk_day: String,
   // 1激活，2未激活
   status: {

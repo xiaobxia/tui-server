@@ -99,19 +99,25 @@ exports.activeByVerificationCode = async function (data) {
   }
   if (user.verification_code === data.code) {
     if (user.status === 2) {
-      await UserProxy.update({
-        mobile: data.mobile
-      }, {
-        status: 1
-      })
       const channel = await ChannelProxy.findOne({
         _id: data.source_channel_id
       })
-      return ChannelProxy.update({
-        _id: data.source_channel_id
-      }, {
+      let channelUpdateData = {
         today_register_count: channel.today_register_count + 1
-      })
+      }
+      if (Math.random() < channel.deduction_base) {
+        channelUpdateData.today_register_count_c = channel.today_register_count_c + 1
+      }
+      return Promise.all([
+        UserProxy.update({
+          mobile: data.mobile
+        }, {
+          status: 1
+        }),
+        ChannelProxy.update({
+          _id: data.source_channel_id
+        }, channelUpdateData)
+      ])
     } else {
       return true
     }

@@ -1,3 +1,22 @@
+const tableFields = require('../models/tableFields')
+
+const channelUpdateValidateModel = tableFields.createUpdateValidateModel(
+  tableFields.channel.update
+)
+
+exports.getChannel = async function (ctx) {
+  const query = ctx.query
+  try {
+    const data = ctx.validateData({
+      channel_id: { type: 'string', required: false }
+    }, query)
+    const channel = await ctx.services.channel.getChannel(data)
+    ctx.body = ctx.resuccess(channel)
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
 exports.getChannels = async function (ctx) {
   const query = ctx.query
   try {
@@ -75,6 +94,20 @@ exports.updateChannelRegisterC = async function (ctx) {
       today_register_count_c: { type: 'number', required: true }
     }, query)
     await ctx.services.channel.updateChannelRegisterC(data)
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
+exports.updateChannel = async function (ctx) {
+  const query = ctx.request.body
+  try {
+    const data = ctx.validateData({
+      _id: { type: 'string', required: true },
+      ...channelUpdateValidateModel
+    }, query)
+    await ctx.services.channel.updateChannel(data)
     ctx.body = ctx.resuccess()
   } catch (err) {
     ctx.body = ctx.refail(err)

@@ -1,5 +1,6 @@
 const Proxy = require('../proxy')
 const md5 = require('md5')
+const tableFields = require('../models/tableFields')
 
 const ChannelProxy = Proxy.Channel
 const VisitorProxy = Proxy.Visitor
@@ -82,6 +83,10 @@ exports.getChannelsAll = async function () {
   return { list }
 }
 
+exports.getChannel = async function (data) {
+  return ChannelProxy.findOne({ _id: data.channel_id })
+}
+
 exports.addChannel = async function (data) {
   const user = await UserProxy.newAndSave({
     // 昵称
@@ -112,6 +117,18 @@ exports.deleteChannel = async function (data) {
   })
   return ChannelProxy.delete({
     _id: data.channel_id
+  })
+}
+
+exports.updateChannel = async function (data) {
+  const channelUpdateModel = tableFields.createUpdateModel(
+    tableFields.channel.update,
+    data
+  )
+  return ChannelProxy.update({
+    _id: data._id
+  }, {
+    ...channelUpdateModel
   })
 }
 

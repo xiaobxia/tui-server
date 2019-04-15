@@ -94,9 +94,11 @@ router.post('/admin/deleteAdminUser', controllers.userController.deleteAdminUser
 /**
  * 渠道模块
  */
+router.get('/channel/getChannel', controllers.channelController.getChannel)
 router.get('/channel/getChannels', controllers.channelController.getChannels)
 router.get('/channel/getChannelsAll', controllers.channelController.getChannelsAll)
 router.post('/channel/addChannel', controllers.channelController.addChannel)
+router.post('/channel/updateChannel', controllers.channelController.updateChannel)
 router.post('/channel/deleteChannel', controllers.channelController.deleteChannel)
 router.post('/channel/updateChannelStatus', controllers.channelController.updateChannelStatus)
 router.post('/channel/updateChannelRegisterC', controllers.channelController.updateChannelRegisterC)

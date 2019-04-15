@@ -94,6 +94,7 @@ const schema = new Schema({
     type: Number,
     default: 1
   },
+  url: String,
   create_at: {
     type: Date,
     default: Date.now

@@ -60,7 +60,6 @@ exports.updateProduct = async function (ctx) {
       _id: { type: 'string', required: true },
       ...productUpdateValidateModel
     }, query)
-    console.log(productUpdateValidateModel)
     await ctx.services.product.updateProduct(data)
     ctx.body = ctx.resuccess()
   } catch (err) {

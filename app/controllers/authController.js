@@ -167,7 +167,7 @@ exports.activeByVerificationCode = async function (ctx) {
     await ctx.services.auth.activeByVerificationCode(data)
     // 发送次数客户端也需要验证
     const keepDay = 30
-    const user = {mobile: data.mobile}
+    const user = { mobile: data.mobile }
     const token = ctx.token.sign(user, 60 * 60 * 24 * keepDay)
     // 添加登录日志
     ctx.body = ctx.resuccess({

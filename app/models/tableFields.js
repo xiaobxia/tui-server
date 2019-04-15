@@ -113,6 +113,14 @@ module.exports = {
       { field: 'create_at' }
     ]
   },
+  channel: {
+    update: [
+      { field: 'url', type: 'string' },
+      { field: 'today_register_count_c', type: 'number' },
+      { field: 'unit_price', type: 'number' },
+      { field: 'deduction_base', type: 'number' }
+    ]
+  },
   product: {
     query: [
       { field: 'name', type: 'string', required: false, regExp: true },
@@ -153,6 +161,7 @@ module.exports = {
       { field: 'mobile' },
       { field: 'click_count' },
       { field: 'brisk_count' },
+      { field: 'view_count' },
       { field: 'last_brisk_day' },
       { field: 'create_at' }
     ]

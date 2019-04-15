@@ -74,7 +74,6 @@ exports.updateProduct = async function (data) {
     tableFields.product.update,
     data
   )
-  console.log(productUpdateModel)
   return ProductProxy.update({
     _id: data._id
   }, {
