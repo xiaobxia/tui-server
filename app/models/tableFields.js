@@ -92,27 +92,6 @@ module.exports = {
       { field: 'value' }
     ]
   },
-  visitor: {
-    resBase: [
-      { field: '_id', alias: 'visitor_id' },
-      { field: 'device_id' },
-      { field: 'source_channel_id' },
-      { field: 'device_type' },
-      { field: 'mobile' },
-      { field: 'page' },
-      { field: 'create_at' }
-    ]
-  },
-  urlClick: {
-    resBase: [
-      { field: '_id' },
-      { field: 'device_id' },
-      { field: 'source_channel_id' },
-      { field: 'device_type' },
-      { field: 'mobile' },
-      { field: 'create_at' }
-    ]
-  },
   channel: {
     update: [
       { field: 'url', type: 'string' },

@@ -3,7 +3,6 @@ const md5 = require('md5')
 const tableFields = require('../models/tableFields')
 
 const ChannelProxy = Proxy.Channel
-const VisitorProxy = Proxy.Visitor
 const UserProxy = Proxy.User
 
 const checkForHexRegExp = new RegExp('^[0-9a-fA-F]{24}$')
@@ -140,36 +139,6 @@ exports.updateChannelStatus = async function (data) {
   })
 }
 
-exports.addChannelViewCount = async function (data) {
-  const channelId = data.source_channel_id
-  const page = data.page
-  const deviceId = data.device_id
-  const channel = await ChannelProxy.findOne({
-    _id: channelId
-  })
-  if (!channel) {
-    return false
-  }
-  let updateData = {}
-  const visitors = await VisitorProxy.find({
-    source_channel_id: channelId,
-    device_id: deviceId
-  })
-  if (visitors.length === 0) {
-    updateData.today_device_count = channel.today_device_count + 1
-  }
-  if (page === 'register') {
-    updateData.today_register_view_count = channel.today_register_view_count + 1
-  } else if (page === 'home') {
-    updateData.today_home_view_count = channel.today_home_view_count + 1
-  } else if (page === 'loan') {
-    updateData.today_loan_view_count = channel.today_loan_view_count + 1
-  }
-  return ChannelProxy.update({
-    _id: channelId
-  }, updateData)
-}
-
 exports.addChannelClickCount = async function (data) {
   const channelId = data.source_channel_id
   const channel = await ChannelProxy.findOne({
@@ -202,19 +171,11 @@ exports.initDayChannels = async function () {
     list.push(ChannelProxy.update({
       _id: item._id
     }, {
-      history_register_view_count: item.history_register_view_count + item.today_register_view_count,
-      history_home_view_count: item.history_home_view_count + item.today_home_view_count,
-      history_loan_view_count: item.history_loan_view_count + item.today_loan_view_count,
       history_verification_code_count: item.history_verification_code_count + item.today_verification_code_count,
-      history_device_count: item.history_device_count + item.today_device_count,
       history_register_count_c: item.history_register_count_c + item.today_register_count_c,
       history_click_count: item.history_click_count + item.today_click_count,
       history_register_count: item.history_register_count + item.today_register_count,
-      today_register_view_count: 0,
-      today_home_view_count: 0,
-      today_loan_view_count: 0,
       today_verification_code_count: 0,
-      today_device_count: 0,
       today_register_count_c: 0,
       today_click_count: 0,
       today_register_count: 0

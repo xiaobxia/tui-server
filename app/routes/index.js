@@ -81,8 +81,6 @@ router.get('/test/testResponse', controllers.testController.testResponse)
  */
 router.post('/log/addViewLog', controllers.logController.addViewLog)
 router.post('/log/addUrlClickLog', controllers.logController.addUrlClickLog)
-router.get('/log/getViewLog', controllers.logController.getViewLog)
-router.get('/log/getUrlClickLog', controllers.logController.getUrlClickLog)
 
 /**
  * 后台管理，用户模块

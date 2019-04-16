@@ -12,15 +12,6 @@ const schema = new Schema({
     type: Number,
     default: 1
   },
-  // 渠道用户浏览注册次数
-  history_register_view_count: {
-    type: Number,
-    default: 0
-  },
-  today_register_view_count: {
-    type: Number,
-    default: 0
-  },
   // 渠道用户验证码发送次数
   history_verification_code_count: {
     type: Number,
@@ -36,33 +27,6 @@ const schema = new Schema({
     default: 0
   },
   today_register_count: {
-    type: Number,
-    default: 0
-  },
-  // 渠道用户设备数
-  history_device_count: {
-    type: Number,
-    default: 0
-  },
-  today_device_count: {
-    type: Number,
-    default: 0
-  },
-  // 渠道用户浏览首页次数
-  history_home_view_count: {
-    type: Number,
-    default: 0
-  },
-  today_home_view_count: {
-    type: Number,
-    default: 0
-  },
-  // 渠道用户浏览首页次数
-  history_loan_view_count: {
-    type: Number,
-    default: 0
-  },
-  today_loan_view_count: {
     type: Number,
     default: 0
   },

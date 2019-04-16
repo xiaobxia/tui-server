@@ -7,18 +7,6 @@ const schema = new Schema({
   day: String,
   channel_id: String,
   channel_name: String,
-  register_view_count: {
-    type: Number,
-    default: 0
-  },
-  home_view_count: {
-    type: Number,
-    default: 0
-  },
-  loan_view_count: {
-    type: Number,
-    default: 0
-  },
   verification_code_count: {
     type: Number,
     default: 0
