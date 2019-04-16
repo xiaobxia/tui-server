@@ -92,7 +92,6 @@ router.post('/admin/deleteAdminUser', controllers.userController.deleteAdminUser
 /**
  * 渠道模块
  */
-router.get('/channel/getChannel', controllers.channelController.getChannel)
 router.get('/channel/getChannels', controllers.channelController.getChannels)
 router.get('/channel/getChannelsAll', controllers.channelController.getChannelsAll)
 router.post('/channel/addChannel', controllers.channelController.addChannel)
@@ -119,7 +118,7 @@ router.get('/customer/getProductsNew', controllers.productController.getProducts
 router.get('/customer/getProductsQuick', controllers.productController.getProductsQuick)
 router.get('/customer/getProductsHot', controllers.productController.getProductsHot)
 router.get('/customer/getProductsBig', controllers.productController.getProductsBig)
-
+router.get('/customer/getChannel', controllers.channelController.getChannel)
 /**
  * 验证码
  */

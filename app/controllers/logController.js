@@ -9,7 +9,8 @@ exports.addViewLog = async function (ctx) {
       mobile: { required: false, type: 'string' }
     }, query)
     // 添加进游客库， 没必要等待
-    data.source_channel_id = await ctx.services.channel.getRealChannelId(data)
+    const realChannel = await ctx.services.channel.getRealChannel(data)
+    data.source_channel_id = realChannel._id
     await ctx.services.user.addViewCount(data)
     ctx.body = ctx.resuccess()
   } catch (err) {
@@ -28,7 +29,8 @@ exports.addUrlClickLog = async function (ctx) {
       mobile: { required: false, type: 'string' }
     }, query)
     // 添加进游客库， 没必要等待
-    data.source_channel_id = await ctx.services.channel.getRealChannelId(data)
+    const realChannel = await ctx.services.channel.getRealChannel(data)
+    data.source_channel_id = realChannel._id
     await ctx.services.channel.addChannelClickCount(data)
     ctx.services.product.addProductClickLog(data)
     ctx.services.user.addClickCount(data)

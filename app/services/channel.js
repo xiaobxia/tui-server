@@ -24,33 +24,25 @@ function isObjectId (id) {
   }
 }
 
-exports.getRealChannelId = async function (data) {
+exports.getRealChannel = async function (data) {
   // 既没渠道id，又查不到用户的，才计入自然渠道
-  if (data.source_channel_id) {
-    if (isObjectId(data.source_channel_id)) {
-      return data.source_channel_id
-    }
-    const channel = await ChannelProxy.findOne({
-      channel_name: '自然渠道'
+  if (data.source_channel_id && isObjectId(data.source_channel_id)) {
+    return ChannelProxy.findOne({
+      _id: data.source_channel_id
     })
-    return channel._id
-  } else if (data.mobile) {
+  } if (data.mobile) {
     const user = await UserProxy.findOne({
       mobile: data.mobile
     })
     if (user && user.source_channel_id) {
-      return user.source_channel_id
+      return ChannelProxy.findOne({
+        _id: user.source_channel_id
+      })
     }
-    const channel = await ChannelProxy.findOne({
-      channel_name: '自然渠道'
-    })
-    return channel._id
-  } else {
-    const channel = await ChannelProxy.findOne({
-      channel_name: '自然渠道'
-    })
-    return channel._id
   }
+  return ChannelProxy.findOne({
+    channel_name: '自然渠道'
+  })
 }
 
 exports.getChannels = async function (query, paging) {

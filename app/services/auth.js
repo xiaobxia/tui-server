@@ -44,8 +44,8 @@ exports.sendVerificationCode = async function (data) {
   if (!vcToken) {
     throw new Error('发送异常')
   }
-  // TODO发送验证码
   const code = Math.random().toFixed(4).toString().split('.')[1]
+  // TODO 发送验证码
   const fData = await Promise.all([
     ChannelProxy.findOne({
       _id: data.source_channel_id

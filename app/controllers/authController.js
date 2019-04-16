@@ -146,7 +146,8 @@ exports.sendVerificationCode = async function (ctx) {
       mobile: { required: true, type: 'string' },
       source_channel_id: { required: true, type: 'string' }
     }, query)
-    data.source_channel_id = await ctx.services.channel.getRealChannelId(data)
+    const realChannel = await ctx.services.channel.getRealChannel(data)
+    data.source_channel_id = realChannel._id
     const res = await ctx.services.auth.sendVerificationCode(data)
     // 发送次数客户端也需要验证
     ctx.body = ctx.resuccess(res)
@@ -163,7 +164,8 @@ exports.activeByVerificationCode = async function (ctx) {
       mobile: { required: true, type: 'string' },
       source_channel_id: { required: true, type: 'string' }
     }, query)
-    data.source_channel_id = await ctx.services.channel.getRealChannelId(data)
+    const realChannel = await ctx.services.channel.getRealChannel(data)
+    data.source_channel_id = realChannel._id
     await ctx.services.auth.activeByVerificationCode(data)
     // 发送次数客户端也需要验证
     const keepDay = 30
@@ -172,6 +174,7 @@ exports.activeByVerificationCode = async function (ctx) {
     // 添加登录日志
     ctx.body = ctx.resuccess({
       ...user,
+      channel_name: realChannel.channel_name,
       token
     })
   } catch (err) {
