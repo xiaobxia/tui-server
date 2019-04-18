@@ -16,3 +16,29 @@ exports.getCustomers = async function (ctx) {
     ctx.body = ctx.refail(err)
   }
 }
+
+exports.setDownload = async function (ctx) {
+  const query = ctx.query
+  try {
+    const data = ctx.validateData({
+      mobile: { type: 'int', required: true }
+    }, query)
+    await ctx.services.user.setDownload(data)
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
+exports.setHasApp = async function (ctx) {
+  const query = ctx.query
+  try {
+    const data = ctx.validateData({
+      mobile: { type: 'int', required: true }
+    }, query)
+    await ctx.services.user.setHasApp(data)
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}

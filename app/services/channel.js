@@ -167,10 +167,14 @@ exports.initDayChannels = async function () {
       history_register_count_c: item.history_register_count_c + item.today_register_count_c,
       history_click_count: item.history_click_count + item.today_click_count,
       history_register_count: item.history_register_count + item.today_register_count,
+      history_download_count: item.history_download_count + item.today_download_count,
+      history_app_count: item.history_app_count + item.today_app_count,
       today_verification_code_count: 0,
       today_register_count_c: 0,
       today_click_count: 0,
-      today_register_count: 0
+      today_register_count: 0,
+      today_download_count: 0,
+      today_app_count: 0
     }))
   }
   return Promise.all(list)

@@ -97,7 +97,8 @@ module.exports = {
       { field: 'url', type: 'string' },
       { field: 'today_register_count_c', type: 'number' },
       { field: 'unit_price', type: 'number' },
-      { field: 'deduction_base', type: 'number' }
+      { field: 'deduction_base', type: 'number' },
+      { field: 'channel_platform', type: 'string' }
     ]
   },
   product: {
@@ -142,6 +143,8 @@ module.exports = {
       { field: 'brisk_count' },
       { field: 'view_count' },
       { field: 'last_brisk_day' },
+      { field: 'has_app' },
+      { field: 'has_download' },
       { field: 'create_at' }
     ]
   }

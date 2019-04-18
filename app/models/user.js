@@ -53,12 +53,17 @@ const schema = new Schema({
     type: Boolean,
     default: false
   },
+  has_download: {
+    type: Boolean,
+    default: false
+  },
   create_at: {
     type: Date,
     default: Date.now
   }
 })
-// 1升序，-1降序。比如积分一般在排序时越大的在越前面，所以用降序
+
 // 手机号不重复
+schema.index({ mobile: 1 }, { unique: true })
 
 module.exports = mongoose.model('User', schema)

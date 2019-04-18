@@ -5,6 +5,8 @@ const Schema = mongoose.Schema
 const schema = new Schema({
   // 渠道的id就是渠道的标识
   user: { type: Schema.Types.ObjectId, ref: 'User' },
+  // 渠道平台
+  channel_platform: String,
   // 渠道名
   channel_name: String,
   // 扣量基数
@@ -27,6 +29,24 @@ const schema = new Schema({
     default: 0
   },
   today_register_count: {
+    type: Number,
+    default: 0
+  },
+  // 渠道用户app下载数
+  history_download_count: {
+    type: Number,
+    default: 0
+  },
+  today_download_count: {
+    type: Number,
+    default: 0
+  },
+  // 渠道用户app激活数
+  history_app_count: {
+    type: Number,
+    default: 0
+  },
+  today_app_count: {
     type: Number,
     default: 0
   },

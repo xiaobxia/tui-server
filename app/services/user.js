@@ -129,9 +129,6 @@ exports.addViewCount = async function (data) {
     updateData.last_brisk_day = moment().format('YYYY-MM-DD HH:mm:ss')
     updateData.brisk_count = user.brisk_count + 1
   }
-  if (data.has_app && data.has_app === 'true') {
-    updateData.has_app = true
-  }
   // 页面浏览次数统计
   updateData.view_count = (user.view_count || 0) + 1
   return UserProxy.update({
@@ -180,4 +177,76 @@ exports.getCustomers = async function (query, paging) {
     })
   }
   return { list: newList, count: fetchData[1] }
+}
+
+exports.setDownload = async function (data) {
+  const mobile = data.mobile
+  if (!mobile) {
+    return false
+  }
+  // 查出用户
+  const user = await UserProxy.findOne({
+    mobile: mobile
+  })
+  if (!user) {
+    return false
+  }
+  let opList = []
+  // 如果没有下载过，那就给渠道记一个下载量
+  if (user.has_download === false) {
+    opList.push(
+      UserProxy.update({
+        mobile: mobile
+      }, {
+        has_download: true
+      })
+    )
+    const channel = await ChannelProxy.findOne({
+      _id: user.source_channel_id
+    })
+    if (channel) {
+      opList.push(
+        ChannelProxy.update({ _id: user.source_channel_id }, {
+          today_download_count: channel.today_download_count + 1
+        })
+      )
+    }
+  }
+  return Promise.all(opList)
+}
+
+exports.setHasApp = async function (data) {
+  const mobile = data.mobile
+  if (!mobile) {
+    return false
+  }
+  // 查出用户
+  const user = await UserProxy.findOne({
+    mobile: mobile
+  })
+  if (!user) {
+    return false
+  }
+  let opList = []
+  // 如果没有激活app，那就给渠道记一个激活
+  if (user.has_app === false) {
+    opList.push(
+      UserProxy.update({
+        mobile: mobile
+      }, {
+        has_app: true
+      })
+    )
+    const channel = await ChannelProxy.findOne({
+      _id: user.source_channel_id
+    })
+    if (channel) {
+      opList.push(
+        ChannelProxy.update({ _id: user.source_channel_id }, {
+          today_app_count: channel.today_app_count + 1
+        })
+      )
+    }
+  }
+  return Promise.all(opList)
 }

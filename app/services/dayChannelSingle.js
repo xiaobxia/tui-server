@@ -49,6 +49,8 @@ exports.addDayChannelSingle = async function () {
       register_count_c: item.today_register_count_c,
       click_count: item.today_click_count,
       register_count: item.today_register_count,
+      download_count: item.today_download_count,
+      app_count: item.today_app_count,
       unit_price: item.unit_price,
       status: item.status
     }))
@@ -76,6 +78,8 @@ exports.updateDayData = async function () {
         register_count_c: item.today_register_count_c,
         click_count: item.today_click_count,
         register_count: item.today_register_count,
+        download_count: item.today_download_count,
+        app_count: item.today_app_count,
         unit_price: item.unit_price,
         status: item.status
       }))
@@ -88,6 +92,8 @@ exports.updateDayData = async function () {
         register_count_c: item.today_register_count_c,
         click_count: item.today_click_count,
         register_count: item.today_register_count,
+        download_count: item.today_download_count,
+        app_count: item.today_app_count,
         unit_price: item.unit_price,
         status: item.status
       }))

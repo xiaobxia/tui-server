@@ -16,7 +16,7 @@ const requestLocal = reqlib('/app/util/requestLocal')
 let rule = new schedule.RecurrenceRule()
 
 rule.hour = 23
-rule.minute = 55
+rule.minute = 57
 
 function addDay () {
   requestLocal.get('schedule/addDay')

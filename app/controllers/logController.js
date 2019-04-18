@@ -6,8 +6,7 @@ exports.addViewLog = async function (ctx) {
       device_type: { required: true, type: 'string' },
       page: { required: true, type: 'string' },
       source_channel_id: { required: false, type: 'string' },
-      mobile: { required: false, type: 'string' },
-      has_app: { required: false, type: 'string' }
+      mobile: { required: false, type: 'string' }
     }, query)
     // 添加进游客库， 没必要等待
     const realChannel = await ctx.services.channel.getRealChannel(data)

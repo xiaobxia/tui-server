@@ -49,7 +49,8 @@ exports.addChannel = async function (ctx) {
     const data = ctx.validateData({
       channel_name: { type: 'string', required: true },
       name: { type: 'string', required: true },
-      password: { type: 'string', required: true }
+      password: { type: 'string', required: true },
+      channel_platform: { type: 'string', required: true }
     }, query)
     await ctx.services.channel.addChannel(data)
     ctx.body = ctx.resuccess()

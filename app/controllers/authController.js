@@ -2,7 +2,9 @@ const tokenRes = [
   { field: '_id' },
   { field: 'name' },
   { field: 'roles' },
-  { field: 'mobile' }
+  { field: 'mobile' },
+  { field: 'channel_id' },
+  { field: 'channel_name' }
 ]
 /**
  * 注册
@@ -169,12 +171,15 @@ exports.activeByVerificationCode = async function (ctx) {
     await ctx.services.auth.activeByVerificationCode(data)
     // 发送次数客户端也需要验证
     const keepDay = 30
-    const user = { mobile: data.mobile }
+    const user = {
+      mobile: data.mobile,
+      channel_name: realChannel.channel_name,
+      channel_id: realChannel._id
+    }
     const token = ctx.token.sign(user, 60 * 60 * 24 * keepDay)
     // 添加登录日志
     ctx.body = ctx.resuccess({
       ...user,
-      channel_name: realChannel.channel_name,
       token
     })
   } catch (err) {
