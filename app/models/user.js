@@ -49,6 +49,10 @@ const schema = new Schema({
     type: Number,
     default: 1
   },
+  has_app: {
+    type: Boolean,
+    default: false
+  },
   create_at: {
     type: Date,
     default: Date.now

@@ -129,6 +129,9 @@ exports.addViewCount = async function (data) {
     updateData.last_brisk_day = moment().format('YYYY-MM-DD HH:mm:ss')
     updateData.brisk_count = user.brisk_count + 1
   }
+  if (data.has_app && data.has_app === 'true') {
+    updateData.has_app = true
+  }
   // 页面浏览次数统计
   updateData.view_count = (user.view_count || 0) + 1
   return UserProxy.update({
