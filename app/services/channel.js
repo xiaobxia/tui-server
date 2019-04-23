@@ -179,3 +179,23 @@ exports.initDayChannels = async function () {
   }
   return Promise.all(list)
 }
+
+exports.getChannelsTiming = async function (query, paging) {
+  const opt = {
+    skip: paging.start,
+    limit: paging.offset,
+    sort: {
+      create_at: -1
+    }
+  }
+  let queryOption = { status: 1 }
+  if (query.channel_name) {
+    queryOption.channel_name = new RegExp(query.channel_name, 'i')
+  }
+  const fetchData = await Promise.all([
+    ChannelProxy.findWithUser(queryOption, opt),
+    ChannelProxy.count(queryOption)
+  ])
+  const list = fetchData[0]
+  return { list, count: fetchData[1] }
+}

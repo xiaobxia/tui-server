@@ -114,3 +114,19 @@ exports.updateChannel = async function (ctx) {
     ctx.body = ctx.refail(err)
   }
 }
+
+exports.getChannelsTiming = async function (ctx) {
+  const query = ctx.query
+  try {
+    const data = ctx.validateData({
+      current: { type: 'int', required: true },
+      pageSize: { type: 'int', required: true },
+      channel_name: { type: 'string', required: false }
+    }, query)
+    let paging = ctx.paging(data.current, data.pageSize)
+    const channels = await ctx.services.channel.getChannelsTiming(data, paging)
+    ctx.body = ctx.resuccess(channels)
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}

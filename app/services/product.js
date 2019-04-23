@@ -128,7 +128,8 @@ exports.getProductsNew = async function () {
     // 最近10天
     'create_at': {
       $gte: moment().subtract(10, 'days')
-    }
+    },
+    status: 1
   }
   const fetchData = await Promise.all([
     ProductProxy.find(queryOption, opt),
@@ -147,7 +148,8 @@ exports.getProductsQuick = async function () {
   let queryOption = {
     'lending_time': {
       $lt: 40
-    }
+    },
+    status: 1
   }
   const fetchData = await Promise.all([
     ProductProxy.find(queryOption, opt),
@@ -163,7 +165,9 @@ exports.getProductsHot = async function () {
       history_click_count: -1
     }
   }
-  let queryOption = {}
+  let queryOption = {
+    status: 1
+  }
   const fetchData = await Promise.all([
     ProductProxy.find(queryOption, opt),
     ProductProxy.count(queryOption)
@@ -178,7 +182,9 @@ exports.getProductsBig = async function () {
       max_quota: -1
     }
   }
-  let queryOption = {}
+  let queryOption = {
+    status: 1
+  }
   const fetchData = await Promise.all([
     ProductProxy.find(queryOption, opt),
     ProductProxy.count(queryOption)

@@ -100,6 +100,7 @@ router.post('/channel/updateChannel', controllers.channelController.updateChanne
 router.post('/channel/deleteChannel', controllers.channelController.deleteChannel)
 router.post('/channel/updateChannelStatus', controllers.channelController.updateChannelStatus)
 router.post('/channel/updateChannelRegisterC', controllers.channelController.updateChannelRegisterC)
+router.get('/channel/getChannelsTiming', controllers.channelController.getChannelsTiming)
 
 /**
  * 产品模块
