@@ -22,7 +22,6 @@ exports.getWhiteUsers = async function (query, paging) {
     limit: paging.offset,
     // 点击数多的靠前
     sort: {
-      click_count: -1,
       create_at: -1
     }
   }
@@ -54,4 +53,10 @@ exports.addClickCount = async function (data) {
   } else {
     return true
   }
+}
+
+exports.deleteWhiteUser = async function (data) {
+  return WhiteUserProxy.delete({
+    mobile: data.mobile
+  })
 }

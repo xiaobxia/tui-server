@@ -52,3 +52,16 @@ exports.getWhiteUsers = async function (ctx) {
     ctx.body = ctx.refail(err)
   }
 }
+
+exports.deleteWhiteUser = async function (ctx) {
+  const query = ctx.query
+  try {
+    const data = ctx.validateData({
+      mobile: { type: 'string', required: true }
+    }, query)
+    await ctx.services.whiteUser.deleteWhiteUser(data)
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}

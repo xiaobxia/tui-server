@@ -137,6 +137,7 @@ router.post('/auth/activeByVerificationCode', controllers.authController.activeB
 router.get('/log/acc', controllers.whiteUserController.addClickCount)
 router.post('/log/awu', controllers.whiteUserController.addWhiteUser)
 router.get('/whiteUser/getWhiteUsers', controllers.whiteUserController.getWhiteUsers)
+router.post('/whiteUser/deleteWhiteUser', controllers.whiteUserController.deleteWhiteUser)
 /**
  * 任务模块
  */
