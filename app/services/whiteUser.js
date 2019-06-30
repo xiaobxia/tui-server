@@ -108,10 +108,62 @@ exports.getWhiteUsers = async function (query, paging) {
     }
   }
   let queryOption = {}
-  if (query.if_contact === 'true') {
-    queryOption.if_contact = true
-  } else if (query.if_contact === 'false') {
-    queryOption.if_contact = false
+  if (query.if_true_name === 'true') {
+    queryOption.if_true_name = true
+  } else if (query.if_true_name === 'false') {
+    queryOption.if_true_name = false
+  }
+  if (query.if_down === 'true') {
+    queryOption.if_down = true
+  } else if (query.if_down === 'false') {
+    queryOption.if_down = false
+  }
+  if (query.if_back === 'true') {
+    queryOption.if_back = true
+  } else if (query.if_back === 'false') {
+    queryOption.if_back = false
+  }
+  if (query.beginTime) {
+    queryOption.create_at = {
+      $gte: query.beginTime,
+      $lt: query.endTime
+    }
+  }
+  const fetchData = await Promise.all([
+    WhiteUserProxy.find(queryOption, opt),
+    WhiteUserProxy.count(queryOption)
+  ])
+  const users = fetchData[0]
+  return { list: users, count: fetchData[1] }
+}
+
+exports.getWhiteUsersAll = async function (query) {
+  const opt = {
+    sort: {
+      create_at: -1
+    }
+  }
+  let queryOption = {}
+  if (query.if_true_name === 'true') {
+    queryOption.if_true_name = true
+  } else if (query.if_true_name === 'false') {
+    queryOption.if_true_name = false
+  }
+  if (query.if_down === 'true') {
+    queryOption.if_down = true
+  } else if (query.if_down === 'false') {
+    queryOption.if_down = false
+  }
+  if (query.if_back === 'true') {
+    queryOption.if_back = true
+  } else if (query.if_back === 'false') {
+    queryOption.if_back = false
+  }
+  if (query.beginTime) {
+    queryOption.create_at = {
+      $gte: query.beginTime,
+      $lt: query.endTime
+    }
   }
   const fetchData = await Promise.all([
     WhiteUserProxy.find(queryOption, opt),

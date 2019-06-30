@@ -43,10 +43,31 @@ exports.getWhiteUsers = async function (ctx) {
     const data = ctx.validateData({
       current: { type: 'int', required: true },
       pageSize: { type: 'int', required: true },
-      if_contact: { type: 'string', required: false }
+      beginTime: { required: false, type: 'string' },
+      endTime: { required: false, type: 'string' },
+      if_true_name: { required: false, type: 'string' },
+      if_down: { required: false, type: 'string' },
+      if_back: { required: false, type: 'string' }
     }, query)
     let paging = ctx.paging(data.current, data.pageSize)
     const users = await ctx.services.whiteUser.getWhiteUsers(data, paging)
+    ctx.body = ctx.resuccess(users)
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
+exports.getWhiteUsersAll = async function (ctx) {
+  const query = ctx.query
+  try {
+    const data = ctx.validateData({
+      beginTime: { required: false, type: 'string' },
+      endTime: { required: false, type: 'string' },
+      if_true_name: { required: false, type: 'string' },
+      if_down: { required: false, type: 'string' },
+      if_back: { required: false, type: 'string' }
+    }, query)
+    const users = await ctx.services.whiteUser.getWhiteUsersAll(data)
     ctx.body = ctx.resuccess(users)
   } catch (err) {
     ctx.body = ctx.refail(err)
