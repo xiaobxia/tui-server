@@ -6,6 +6,21 @@ const schema = new Schema({
   name: String,
   // 手机号
   mobile: String,
+  // 是否实名
+  if_true_name: {
+    type: Boolean,
+    default: false
+  },
+  // 是否下款
+  if_down: {
+    type: Boolean,
+    default: false
+  },
+  // 是否回款
+  if_back: {
+    type: Boolean,
+    default: false
+  },
   // 真是姓名
   true_name: String,
   // 性别（1：男，2：女）

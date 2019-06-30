@@ -136,6 +136,14 @@ router.post('/auth/activeByVerificationCode', controllers.authController.activeB
  */
 router.get('/log/acc', controllers.whiteUserController.addClickCount)
 router.post('/log/awu', controllers.whiteUserController.addWhiteUser)
+// 实名用户
+router.post('/log/atu', controllers.whiteUserController.addTrueNameUser)
+// 下款用户
+router.post('/log/adu', controllers.whiteUserController.addDownUser)
+// 回款用户
+router.post('/log/abu', controllers.whiteUserController.addBackUser)
+// 强制更新用户
+router.post('/log/afu', controllers.whiteUserController.addForceUser)
 router.get('/whiteUser/getWhiteUsers', controllers.whiteUserController.getWhiteUsers)
 router.post('/whiteUser/deleteWhiteUser', controllers.whiteUserController.deleteWhiteUser)
 /**

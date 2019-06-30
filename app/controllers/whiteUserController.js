@@ -65,3 +65,68 @@ exports.deleteWhiteUser = async function (ctx) {
     ctx.body = ctx.refail(err)
   }
 }
+
+exports.addTrueNameUser = async function (ctx) {
+  const query = ctx.request.body
+  try {
+    const data = ctx.validateData({
+      mobile: { type: 'string', required: true }
+    }, query)
+    await ctx.services.whiteUser.addTrueNameUser(data)
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
+exports.addDownUser = async function (ctx) {
+  const query = ctx.request.body
+  try {
+    const data = ctx.validateData({
+      mobile: { type: 'string', required: true }
+    }, query)
+    await ctx.services.whiteUser.addDownUser(data)
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
+exports.addBackUser = async function (ctx) {
+  const query = ctx.request.body
+  try {
+    const data = ctx.validateData({
+      mobile: { type: 'string', required: true }
+    }, query)
+    await ctx.services.whiteUser.addBackUser(data)
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
+exports.addBackUser = async function (ctx) {
+  const query = ctx.request.body
+  try {
+    const data = ctx.validateData({
+      mobile: { type: 'string', required: true }
+    }, query)
+    await ctx.services.whiteUser.addBackUser(data)
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
+exports.addForceUser = async function (ctx) {
+  const query = ctx.request.body
+  try {
+    const data = ctx.validateData({
+      mobile: { type: 'string', required: true }
+    }, query)
+    await ctx.services.whiteUser.addForceUser(data)
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}

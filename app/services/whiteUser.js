@@ -16,6 +16,88 @@ exports.addWhiteUser = async function (data) {
   }
 }
 
+exports.addForceUser = async function (data) {
+  const user = await WhiteUserProxy.findOne({
+    mobile: data.mobile
+  })
+  if (user) {
+    const mobile = data.mobile
+    return WhiteUserProxy.update({
+      mobile: mobile
+    }, {
+      // 更新注册时间
+      create_at: Date.now()
+    })
+  } else {
+    return WhiteUserProxy.newAndSave({
+      mobile: data.mobile
+    })
+  }
+}
+
+exports.addTrueNameUser = async function (data) {
+  const user = await WhiteUserProxy.findOne({
+    mobile: data.mobile
+  })
+  if (user) {
+    const mobile = data.mobile
+    return WhiteUserProxy.update({
+      mobile: mobile
+    }, {
+      if_true_name: true,
+      // 更新注册时间
+      create_at: Date.now()
+    })
+  } else {
+    return WhiteUserProxy.newAndSave({
+      mobile: data.mobile,
+      if_true_name: true
+    })
+  }
+}
+
+exports.addDownUser = async function (data) {
+  const user = await WhiteUserProxy.findOne({
+    mobile: data.mobile
+  })
+  if (user) {
+    const mobile = data.mobile
+    return WhiteUserProxy.update({
+      mobile: mobile
+    }, {
+      if_down: true,
+      // 更新注册时间
+      create_at: Date.now()
+    })
+  } else {
+    return WhiteUserProxy.newAndSave({
+      mobile: data.mobile,
+      if_down: true
+    })
+  }
+}
+
+exports.addBackUser = async function (data) {
+  const user = await WhiteUserProxy.findOne({
+    mobile: data.mobile
+  })
+  if (user) {
+    const mobile = data.mobile
+    return WhiteUserProxy.update({
+      mobile: mobile
+    }, {
+      if_back: true,
+      // 更新注册时间
+      create_at: Date.now()
+    })
+  } else {
+    return WhiteUserProxy.newAndSave({
+      mobile: data.mobile,
+      if_back: true
+    })
+  }
+}
+
 exports.getWhiteUsers = async function (query, paging) {
   const opt = {
     skip: paging.start,
