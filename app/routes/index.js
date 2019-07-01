@@ -145,6 +145,7 @@ router.post('/log/abu', controllers.whiteUserController.addBackUser)
 // 强制更新用户
 router.post('/log/afu', controllers.whiteUserController.addForceUser)
 router.get('/log/getWhiteUsersAll', controllers.whiteUserController.getWhiteUsersAll)
+router.get('/log/getWhiteUsers', controllers.whiteUserController.getWhiteUsers)
 router.get('/whiteUser/getWhiteUsers', controllers.whiteUserController.getWhiteUsers)
 router.post('/whiteUser/deleteWhiteUser', controllers.whiteUserController.deleteWhiteUser)
 /**

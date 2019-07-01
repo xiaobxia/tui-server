@@ -45,6 +45,8 @@ exports.getWhiteUsers = async function (ctx) {
       pageSize: { type: 'int', required: true },
       beginTime: { required: false, type: 'string' },
       endTime: { required: false, type: 'string' },
+      beginTimeA: { required: false, type: 'string' },
+      endTimeA: { required: false, type: 'string' },
       if_true_name: { required: false, type: 'string' },
       if_down: { required: false, type: 'string' },
       if_back: { required: false, type: 'string' }
@@ -63,6 +65,8 @@ exports.getWhiteUsersAll = async function (ctx) {
     const data = ctx.validateData({
       beginTime: { required: false, type: 'string' },
       endTime: { required: false, type: 'string' },
+      beginTimeA: { required: false, type: 'string' },
+      endTimeA: { required: false, type: 'string' },
       if_true_name: { required: false, type: 'string' },
       if_down: { required: false, type: 'string' },
       if_back: { required: false, type: 'string' }

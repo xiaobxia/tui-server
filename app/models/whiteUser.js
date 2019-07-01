@@ -54,6 +54,10 @@ const schema = new Schema({
     type: Boolean,
     default: false
   },
+  // 活跃时间
+  active_at: {
+    type: Date
+  },
   create_at: {
     type: Date,
     default: Date.now

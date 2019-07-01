@@ -10,9 +10,15 @@ exports.addWhiteUser = async function (data) {
     const mobile = data.mobile
     return WhiteUserProxy.update({
       mobile: mobile
-    }, data)
+    }, {
+      ...data,
+      active_at: Date.now()
+    })
   } else {
-    return WhiteUserProxy.newAndSave(data)
+    return WhiteUserProxy.newAndSave({
+      ...data,
+      active_at: Date.now()
+    })
   }
 }
 
@@ -26,11 +32,13 @@ exports.addForceUser = async function (data) {
       mobile: mobile
     }, {
       // 更新注册时间
-      create_at: Date.now()
+      create_at: Date.now(),
+      active_at: Date.now()
     })
   } else {
     return WhiteUserProxy.newAndSave({
-      mobile: data.mobile
+      mobile: data.mobile,
+      active_at: Date.now()
     })
   }
 }
@@ -46,12 +54,14 @@ exports.addTrueNameUser = async function (data) {
     }, {
       if_true_name: true,
       // 更新注册时间
-      create_at: Date.now()
+      create_at: Date.now(),
+      active_at: Date.now()
     })
   } else {
     return WhiteUserProxy.newAndSave({
       mobile: data.mobile,
-      if_true_name: true
+      if_true_name: true,
+      active_at: Date.now()
     })
   }
 }
@@ -67,12 +77,14 @@ exports.addDownUser = async function (data) {
     }, {
       if_down: true,
       // 更新注册时间
-      create_at: Date.now()
+      create_at: Date.now(),
+      active_at: Date.now()
     })
   } else {
     return WhiteUserProxy.newAndSave({
       mobile: data.mobile,
-      if_down: true
+      if_down: true,
+      active_at: Date.now()
     })
   }
 }
@@ -88,12 +100,14 @@ exports.addBackUser = async function (data) {
     }, {
       if_back: true,
       // 更新注册时间
-      create_at: Date.now()
+      create_at: Date.now(),
+      active_at: Date.now()
     })
   } else {
     return WhiteUserProxy.newAndSave({
       mobile: data.mobile,
-      if_back: true
+      if_back: true,
+      active_at: Date.now()
     })
   }
 }
@@ -127,6 +141,12 @@ exports.getWhiteUsers = async function (query, paging) {
     queryOption.create_at = {
       $gte: query.beginTime,
       $lt: query.endTime
+    }
+  }
+  if (query.beginTimeA) {
+    queryOption.active_at = {
+      $gte: query.beginTimeA,
+      $lt: query.endTimeA
     }
   }
   const fetchData = await Promise.all([
@@ -163,6 +183,12 @@ exports.getWhiteUsersAll = async function (query) {
     queryOption.create_at = {
       $gte: query.beginTime,
       $lt: query.endTime
+    }
+  }
+  if (query.beginTimeA) {
+    queryOption.active_at = {
+      $gte: query.beginTimeA,
+      $lt: query.endTimeA
     }
   }
   const fetchData = await Promise.all([
