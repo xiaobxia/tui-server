@@ -148,6 +148,14 @@ router.get('/log/getWhiteUsersAll', controllers.whiteUserController.getWhiteUser
 router.get('/log/getWhiteUsers', controllers.whiteUserController.getWhiteUsers)
 router.get('/whiteUser/getWhiteUsers', controllers.whiteUserController.getWhiteUsers)
 router.post('/whiteUser/deleteWhiteUser', controllers.whiteUserController.deleteWhiteUser)
+// 用source添加
+router.get('/sp/awu', controllers.whiteUserController.addWhiteUserSp)
+// 实名用户
+router.get('/sp/atu', controllers.whiteUserController.addTrueNameUserSp)
+// 下款用户
+router.get('/sp/adu', controllers.whiteUserController.addDownUserSp)
+// 回款用户
+router.get('/sp/abu', controllers.whiteUserController.addBackUserSp)
 /**
  * 任务模块
  */
