@@ -55,13 +55,15 @@ exports.addTrueNameUser = async function (data) {
       if_true_name: true,
       // 更新注册时间
       create_at: Date.now(),
-      active_at: Date.now()
+      active_at: Date.now(),
+      source: 'xjd'
     })
   } else {
     return WhiteUserProxy.newAndSave({
       mobile: data.mobile,
       if_true_name: true,
-      active_at: Date.now()
+      active_at: Date.now(),
+      source: 'xjd'
     })
   }
 }
@@ -78,13 +80,15 @@ exports.addDownUser = async function (data) {
       if_down: true,
       // 更新注册时间
       create_at: Date.now(),
-      active_at: Date.now()
+      active_at: Date.now(),
+      source: 'xjd'
     })
   } else {
     return WhiteUserProxy.newAndSave({
       mobile: data.mobile,
       if_down: true,
-      active_at: Date.now()
+      active_at: Date.now(),
+      source: 'xjd'
     })
   }
 }
@@ -101,13 +105,15 @@ exports.addBackUser = async function (data) {
       if_back: true,
       // 更新注册时间
       create_at: Date.now(),
-      active_at: Date.now()
+      active_at: Date.now(),
+      source: 'xjd'
     })
   } else {
     return WhiteUserProxy.newAndSave({
       mobile: data.mobile,
       if_back: true,
-      active_at: Date.now()
+      active_at: Date.now(),
+      source: 'xjd'
     })
   }
 }

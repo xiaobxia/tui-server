@@ -15,7 +15,8 @@ exports.addWhiteUser = async function (ctx) {
       wechat_number: { type: 'string', required: false },
       qq_number: { type: 'string', required: false },
       education_type: { type: 'string', required: false },
-      zhima_score: { type: 'string', required: false }
+      zhima_score: { type: 'string', required: false },
+      source: { type: 'string', required: false }
     }, query)
     await ctx.services.whiteUser.addWhiteUser(data)
     ctx.body = ctx.resuccess()
@@ -111,19 +112,6 @@ exports.addDownUser = async function (ctx) {
       mobile: { type: 'string', required: true }
     }, query)
     await ctx.services.whiteUser.addDownUser(data)
-    ctx.body = ctx.resuccess()
-  } catch (err) {
-    ctx.body = ctx.refail(err)
-  }
-}
-
-exports.addBackUser = async function (ctx) {
-  const query = ctx.request.body
-  try {
-    const data = ctx.validateData({
-      mobile: { type: 'string', required: true }
-    }, query)
-    await ctx.services.whiteUser.addBackUser(data)
     ctx.body = ctx.resuccess()
   } catch (err) {
     ctx.body = ctx.refail(err)

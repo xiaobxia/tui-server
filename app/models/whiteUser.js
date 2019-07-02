@@ -21,6 +21,8 @@ const schema = new Schema({
     type: Boolean,
     default: false
   },
+  // 来源(xjd,dc)
+  source: String,
   // 真是姓名
   true_name: String,
   // 性别（1：男，2：女）
