@@ -128,6 +128,9 @@ exports.getWhiteUsers = async function (query, paging) {
     }
   }
   let queryOption = {}
+  if (query.source) {
+    queryOption.source = query.source
+  }
   if (query.if_true_name === 'true') {
     queryOption.if_true_name = true
   } else if (query.if_true_name === 'false') {
@@ -170,6 +173,9 @@ exports.getWhiteUsersAll = async function (query) {
     }
   }
   let queryOption = {}
+  if (query.source) {
+    queryOption.source = query.source
+  }
   if (query.if_true_name === 'true') {
     queryOption.if_true_name = true
   } else if (query.if_true_name === 'false') {
