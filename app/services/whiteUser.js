@@ -7,12 +7,18 @@ exports.addWhiteUser = async function (data) {
     mobile: data.mobile
   })
   if (user) {
+    let newSource = 'dc'
+    // 如果被标记为现金贷用户了，就不再改回贷超用户
+    if (user.source === 'xjd' || data.source === 'xjd') {
+      newSource = 'xjd'
+    }
     const mobile = data.mobile
     return WhiteUserProxy.update({
       mobile: mobile
     }, {
       ...data,
-      active_at: Date.now()
+      active_at: Date.now(),
+      source: newSource
     })
   } else {
     return WhiteUserProxy.newAndSave({
