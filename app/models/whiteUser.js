@@ -11,15 +11,24 @@ const schema = new Schema({
     type: Boolean,
     default: false
   },
+  true_name_at: {
+    type: Date
+  },
   // 是否下款
   if_down: {
     type: Boolean,
     default: false
   },
+  down_at: {
+    type: Date
+  },
   // 是否回款
   if_back: {
     type: Boolean,
     default: false
+  },
+  back_at: {
+    type: Date
   },
   // 来源(xjd,dc)
   source: String,
