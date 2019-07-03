@@ -146,6 +146,7 @@ router.post('/log/abu', controllers.whiteUserController.addBackUser)
 router.post('/log/afu', controllers.whiteUserController.addForceUser)
 router.get('/log/getWhiteUsersAll', controllers.whiteUserController.getWhiteUsersAll)
 router.get('/log/getWhiteUsers', controllers.whiteUserController.getWhiteUsers)
+router.get('/log/getWhiteUsersByStart', controllers.whiteUserController.getWhiteUsersByStart)
 router.get('/whiteUser/getWhiteUsers', controllers.whiteUserController.getWhiteUsers)
 router.post('/whiteUser/deleteWhiteUser', controllers.whiteUserController.deleteWhiteUser)
 // 用source添加
