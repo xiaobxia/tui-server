@@ -51,7 +51,9 @@ exports.getWhiteUsers = async function (ctx) {
       if_true_name: { required: false, type: 'string' },
       if_down: { required: false, type: 'string' },
       if_back: { required: false, type: 'string' },
-      source: { required: false, type: 'string' }
+      source: { required: false, type: 'string' },
+      sort: { required: false, type: 'string' },
+      mobile: { required: false, type: 'string' }
     }, query)
     let paging = ctx.paging(data.current, data.pageSize)
     const users = await ctx.services.whiteUser.getWhiteUsers(data, paging)

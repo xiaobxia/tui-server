@@ -125,17 +125,27 @@ exports.addBackUser = async function (data) {
 }
 
 exports.getWhiteUsers = async function (query, paging) {
+  let sort = {
+    create_at: -1
+  }
+  if (query.sort === 'source') {
+    sort = {
+      source: -1,
+      create_at: -1
+    }
+  }
   const opt = {
     skip: paging.start,
     limit: paging.offset,
     // 点击数多的靠前
-    sort: {
-      create_at: -1
-    }
+    sort: sort
   }
   let queryOption = {}
   if (query.source) {
     queryOption.source = query.source
+  }
+  if (query.mobile) {
+    queryOption.mobile = query.mobile
   }
   if (query.if_true_name === 'true') {
     queryOption.if_true_name = true
