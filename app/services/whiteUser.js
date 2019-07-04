@@ -1,4 +1,5 @@
 const Proxy = require('../proxy')
+const moment = require('moment')
 
 const WhiteUserProxy = Proxy.WhiteUser
 
@@ -305,4 +306,45 @@ exports.deleteWhiteUser = async function (data) {
   return WhiteUserProxy.delete({
     mobile: data.mobile
   })
+}
+
+exports.getTodayCount = async function () {
+  let startDay = moment().format('YYYY-MM-DD')
+  let endDay = moment().add(1, 'days').format('YYYY-MM-DD')
+  const fetchData = await Promise.all([
+    // 今日注册
+    WhiteUserProxy.count({
+      'create_at': {
+        $gte: startDay,
+        $lt: endDay
+      }
+    }),
+    // 今日活跃
+    WhiteUserProxy.count({
+      'active_at': {
+        $gte: startDay,
+        $lt: endDay
+      }
+    }),
+    WhiteUserProxy.count({
+      'create_at': {
+        $gte: startDay,
+        $lt: endDay
+      },
+      source: 'xjd'
+    }),
+    WhiteUserProxy.count({
+      'active_at': {
+        $gte: startDay,
+        $lt: endDay
+      },
+      source: 'xjd'
+    })
+  ])
+  return {
+    dayR: fetchData[0],
+    dayA: fetchData[1],
+    dayRX: fetchData[2],
+    dayAX: fetchData[3]
+  }
 }

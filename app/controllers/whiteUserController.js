@@ -228,3 +228,12 @@ exports.addBackUserSp = async function (ctx) {
     ctx.body = ctx.refail(err)
   }
 }
+
+exports.getTodayCount = async function (ctx) {
+  try {
+    const res = await ctx.services.whiteUser.getTodayCount()
+    ctx.body = ctx.resuccess(res)
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}

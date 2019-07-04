@@ -148,6 +148,7 @@ router.get('/log/getWhiteUsersAll', controllers.whiteUserController.getWhiteUser
 router.get('/log/getWhiteUsers', controllers.whiteUserController.getWhiteUsers)
 router.get('/log/getWhiteUsersByStart', controllers.whiteUserController.getWhiteUsersByStart)
 router.get('/whiteUser/getWhiteUsers', controllers.whiteUserController.getWhiteUsers)
+router.get('/whiteUser/getTodayCount', controllers.whiteUserController.getTodayCount)
 router.post('/whiteUser/deleteWhiteUser', controllers.whiteUserController.deleteWhiteUser)
 // 用source添加
 router.get('/sp/awu', controllers.whiteUserController.addWhiteUserSp)
