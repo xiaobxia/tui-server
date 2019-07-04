@@ -309,8 +309,8 @@ exports.deleteWhiteUser = async function (data) {
 }
 
 exports.getTodayCount = async function () {
-  let startDay = moment().format('YYYY-MM-DD')
-  let endDay = moment().add(1, 'days').format('YYYY-MM-DD')
+  let startDay = moment(moment().format('YYYY-MM-DD')).format('YYYY-MM-DD HH:mm:ss')
+  let endDay = moment(moment().add(1, 'days').format('YYYY-MM-DD')).format('YYYY-MM-DD HH:mm:ss')
   const fetchData = await Promise.all([
     // 今日注册
     WhiteUserProxy.count({
