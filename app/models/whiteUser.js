@@ -69,6 +69,10 @@ const schema = new Schema({
   active_at: {
     type: Date
   },
+  active_days: {
+    type: Number,
+    default: 0
+  },
   create_at: {
     type: Date,
     default: Date.now

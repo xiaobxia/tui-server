@@ -14,12 +14,18 @@ exports.addWhiteUser = async function (data) {
       newSource = 'xjd'
     }
     const mobile = data.mobile
+    let activeDays = user.active_days || 0
+    // 不是同一天，说明在新的一天活跃了
+    if (!moment().isSame(user.active_at, 'day')) {
+      activeDays++
+    }
     return WhiteUserProxy.update({
       mobile: mobile
     }, {
       ...data,
       active_at: Date.now(),
-      source: newSource
+      source: newSource,
+      active_days: activeDays
     })
   } else {
     return WhiteUserProxy.newAndSave({
@@ -56,13 +62,19 @@ exports.addTrueNameUser = async function (data) {
   })
   if (user) {
     const mobile = data.mobile
+    let activeDays = user.active_days || 0
+    // 不是同一天，说明在新的一天活跃了
+    if (!moment().isSame(user.active_at, 'day')) {
+      activeDays++
+    }
     return WhiteUserProxy.update({
       mobile: mobile
     }, {
       if_true_name: true,
       active_at: Date.now(),
       source: 'xjd',
-      true_name_at: Date.now()
+      true_name_at: Date.now(),
+      active_days: activeDays
     })
   } else {
     return WhiteUserProxy.newAndSave({
@@ -81,13 +93,19 @@ exports.addDownUser = async function (data) {
   })
   if (user) {
     const mobile = data.mobile
+    let activeDays = user.active_days || 0
+    // 不是同一天，说明在新的一天活跃了
+    if (!moment().isSame(user.active_at, 'day')) {
+      activeDays++
+    }
     return WhiteUserProxy.update({
       mobile: mobile
     }, {
       if_down: true,
       active_at: Date.now(),
       source: 'xjd',
-      down_at: Date.now()
+      down_at: Date.now(),
+      active_days: activeDays
     })
   } else {
     return WhiteUserProxy.newAndSave({
@@ -106,13 +124,19 @@ exports.addBackUser = async function (data) {
   })
   if (user) {
     const mobile = data.mobile
+    let activeDays = user.active_days || 0
+    // 不是同一天，说明在新的一天活跃了
+    if (!moment().isSame(user.active_at, 'day')) {
+      activeDays++
+    }
     return WhiteUserProxy.update({
       mobile: mobile
     }, {
       if_back: true,
       back_at: Date.now(),
       active_at: Date.now(),
-      source: 'xjd'
+      source: 'xjd',
+      active_days: activeDays
     })
   } else {
     return WhiteUserProxy.newAndSave({
