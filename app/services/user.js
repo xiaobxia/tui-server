@@ -94,7 +94,7 @@ exports.updateAdminUser = async function (data) {
   if (data.status) {
     updateData.status = data.status
   }
-  return UserProxy.update({name: data.name}, updateData)
+  return UserProxy.update({ name: data.name }, updateData)
 }
 
 exports.deleteAdminUser = async function (data) {

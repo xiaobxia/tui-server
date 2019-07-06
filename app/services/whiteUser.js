@@ -383,7 +383,7 @@ exports.initTrueName = async function () {
     source: 'xjd'
   })
   let opList = []
-  for (let i=0;i<users.length;i++) {
+  for (let i = 0; i < users.length; i++) {
     opList.push(WhiteUserProxy.update({
       mobile: users[i].mobile
     }, {
