@@ -78,7 +78,8 @@ exports.getWhiteUsersByStart = async function (ctx) {
       if_back: { required: false, type: 'string' },
       source: { required: false, type: 'string' },
       sort: { required: false, type: 'string' },
-      mobile: { required: false, type: 'string' }
+      mobile: { required: false, type: 'string' },
+      active_days: { required: false, type: 'int' }
     }, query)
     const users = await ctx.services.whiteUser.getWhiteUsersByStart(data)
     ctx.body = ctx.resuccess(users)
@@ -232,6 +233,15 @@ exports.addBackUserSp = async function (ctx) {
 exports.getTodayCount = async function (ctx) {
   try {
     const res = await ctx.services.whiteUser.getTodayCount()
+    ctx.body = ctx.resuccess(res)
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
+exports.initTrueName = async function (ctx) {
+  try {
+    const res = await ctx.services.whiteUser.initTrueName()
     ctx.body = ctx.resuccess(res)
   } catch (err) {
     ctx.body = ctx.refail(err)

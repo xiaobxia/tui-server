@@ -87,6 +87,7 @@ router.post('/log/addUrlClickLog', controllers.logController.addUrlClickLog)
  */
 router.get('/admin/getAdminUsers', controllers.userController.getAdminUsers)
 router.post('/admin/addAdminUser', controllers.userController.addAdminUser)
+router.post('/admin/updateAdminUser', controllers.userController.updateAdminUser)
 router.post('/admin/deleteAdminUser', controllers.userController.deleteAdminUser)
 
 /**
@@ -147,6 +148,9 @@ router.post('/log/afu', controllers.whiteUserController.addForceUser)
 router.get('/log/getWhiteUsersAll', controllers.whiteUserController.getWhiteUsersAll)
 router.get('/log/getWhiteUsers', controllers.whiteUserController.getWhiteUsers)
 router.get('/log/getWhiteUsersByStart', controllers.whiteUserController.getWhiteUsersByStart)
+
+router.get('/log/initTrueName', controllers.whiteUserController.initTrueName)
+
 router.get('/whiteUser/getWhiteUsers', controllers.whiteUserController.getWhiteUsers)
 router.get('/whiteUser/getTodayCount', controllers.whiteUserController.getTodayCount)
 router.post('/whiteUser/deleteWhiteUser', controllers.whiteUserController.deleteWhiteUser)

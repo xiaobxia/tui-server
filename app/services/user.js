@@ -82,6 +82,21 @@ exports.addAdminUser = async function (data) {
   })
 }
 
+exports.updateAdminUser = async function (data) {
+  let updateData = {}
+  if (data.password) {
+    updateData.password_raw = data.password
+    updateData.password = md5(updateData.password_raw)
+  }
+  if (data.roles) {
+    updateData.roles = [data.roles]
+  }
+  if (data.status) {
+    updateData.status = data.status
+  }
+  return UserProxy.update({name: data.name}, updateData)
+}
+
 exports.deleteAdminUser = async function (data) {
   return UserProxy.delete({
     _id: data.user_id

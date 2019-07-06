@@ -28,6 +28,22 @@ exports.addAdminUser = async function (ctx) {
   }
 }
 
+exports.updateAdminUser = async function (ctx) {
+  const query = ctx.request.body
+  try {
+    const data = ctx.validateData({
+      name: { type: 'string', required: true },
+      password: { type: 'string', required: false },
+      roles: { type: 'string', required: false },
+      status: { type: 'int', required: false }
+    }, query)
+    await ctx.services.user.updateAdminUser(data)
+    ctx.body = ctx.resuccess()
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}
+
 exports.deleteAdminUser = async function (ctx) {
   const query = ctx.request.body
   try {

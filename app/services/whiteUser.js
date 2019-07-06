@@ -230,6 +230,11 @@ exports.getWhiteUsersByStart = async function (query) {
   if (query.mobile) {
     queryOption.mobile = query.mobile
   }
+  if (query.active_days) {
+    queryOption.active_days = {
+      $gte: query.active_days
+    }
+  }
   if (query.if_true_name === 'true') {
     queryOption.if_true_name = true
   } else if (query.if_true_name === 'false') {
@@ -371,4 +376,19 @@ exports.getTodayCount = async function () {
     dayRX: fetchData[2],
     dayAX: fetchData[3]
   }
+}
+
+exports.initTrueName = async function () {
+  const users = await WhiteUserProxy.find({
+    source: 'xjd'
+  })
+  let opList = []
+  for (let i=0;i<users.length;i++) {
+    opList.push(WhiteUserProxy.update({
+      mobile: users[i].mobile
+    }, {
+      if_true_name: true
+    }))
+  }
+  return Promise.all(opList)
 }
