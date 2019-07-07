@@ -180,7 +180,14 @@ exports.addWhiteUserSp = async function (ctx) {
       mobile: { type: 'string', required: true },
       source: { type: 'string', required: false }
     }, query)
-    await ctx.services.whiteUser.addWhiteUser(data)
+    let referer = ctx.headers.referer
+    let ifDev = false
+    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1) {
+      ifDev = true
+    }
+    if (!ifDev) {
+      await ctx.services.whiteUser.addWhiteUser(data)
+    }
     ctx.type = 'text/javascript'
     ctx.body = ''
   } catch (err) {
@@ -195,7 +202,14 @@ exports.addTrueNameUserSp = async function (ctx) {
     const data = ctx.validateData({
       mobile: { type: 'string', required: true }
     }, query)
-    await ctx.services.whiteUser.addTrueNameUser(data)
+    let referer = ctx.headers.referer
+    let ifDev = false
+    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1) {
+      ifDev = true
+    }
+    if (!ifDev) {
+      await ctx.services.whiteUser.addTrueNameUser(data)
+    }
     ctx.type = 'text/javascript'
     ctx.body = ''
   } catch (err) {
@@ -210,7 +224,14 @@ exports.addDownUserSp = async function (ctx) {
     const data = ctx.validateData({
       mobile: { type: 'string', required: true }
     }, query)
-    await ctx.services.whiteUser.addDownUser(data)
+    let referer = ctx.headers.referer
+    let ifDev = false
+    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1) {
+      ifDev = true
+    }
+    if (!ifDev) {
+      await ctx.services.whiteUser.addDownUser(data)
+    }
     ctx.type = 'text/javascript'
     ctx.body = ''
   } catch (err) {
@@ -225,7 +246,14 @@ exports.addBackUserSp = async function (ctx) {
     const data = ctx.validateData({
       mobile: { type: 'string', required: true }
     }, query)
-    await ctx.services.whiteUser.addBackUser(data)
+    let referer = ctx.headers.referer
+    let ifDev = false
+    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1) {
+      ifDev = true
+    }
+    if (!ifDev) {
+      await ctx.services.whiteUser.addBackUser(data)
+    }
     ctx.type = 'text/javascript'
     ctx.body = ''
   } catch (err) {
@@ -265,7 +293,7 @@ exports.serverAddDownUserSp = async function (ctx) {
     }, query)
     let referer = ctx.headers.referer
     let ifDev = false
-    if (referer.indexOf('localhost') || referer.indexOf('47.110.153.34')) {
+    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1) {
       ifDev = true
     }
     if (!ifDev) {
@@ -292,7 +320,7 @@ exports.serverAddBackUserSp = async function (ctx) {
     }, query)
     let referer = ctx.headers.referer
     let ifDev = false
-    if (referer.indexOf('localhost') || referer.indexOf('47.110.153.34')) {
+    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1) {
       ifDev = true
     }
     if (!ifDev) {
