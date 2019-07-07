@@ -92,7 +92,7 @@ exports.serverAddDownUserSp = async function (data) {
   const nameList = JSON.parse(data.u)
   const dayList = JSON.parse(data.d)
   let opList = []
-  for (let i=0;i<mobileList.length;i++) {
+  for (let i = 0; i < mobileList.length; i++) {
     const user = await WhiteUserProxy.findOne({
       mobile: mobileList[i]
     })
