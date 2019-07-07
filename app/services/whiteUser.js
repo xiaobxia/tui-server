@@ -87,6 +87,46 @@ exports.addTrueNameUser = async function (data) {
   }
 }
 
+exports.serverAddDownUserSp = async function (data) {
+  const mobileList = JSON.parse(data.m)
+  const nameList = JSON.parse(data.u)
+  const dayList = JSON.parse(data.d)
+  let opList = []
+  for (let i=0;i<mobileList.length;i++) {
+    const user = await WhiteUserProxy.findOne({
+      mobile: mobileList[i]
+    })
+    if (user) {
+      const mobile = mobileList[i]
+      let activeDays = user.active_days || 0
+      // 不是同一天，说明在新的一天活跃了
+      if (!moment().isSame(user.active_at, 'day')) {
+        activeDays++
+      }
+      opList.push(WhiteUserProxy.update({
+        mobile: mobile
+      }, {
+        if_down: true,
+        active_at: Date.now(),
+        source: 'xjd',
+        down_at: dayList[i],
+        active_days: activeDays,
+        name: nameList[i]
+      }))
+    } else {
+      opList.push(WhiteUserProxy.newAndSave({
+        mobile: mobileList[i],
+        if_down: true,
+        active_at: Date.now(),
+        source: 'xjd',
+        name: nameList[i],
+        down_at: dayList[i]
+      }))
+    }
+  }
+  return Promise.all(opList)
+}
+
 exports.addDownUser = async function (data) {
   const user = await WhiteUserProxy.findOne({
     mobile: data.mobile

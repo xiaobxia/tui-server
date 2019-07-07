@@ -184,7 +184,8 @@ exports.addWhiteUserSp = async function (ctx) {
     ctx.type = 'text/javascript'
     ctx.body = ''
   } catch (err) {
-    ctx.body = ctx.refail(err)
+    ctx.type = 'text/javascript'
+    ctx.body = ''
   }
 }
 
@@ -198,7 +199,8 @@ exports.addTrueNameUserSp = async function (ctx) {
     ctx.type = 'text/javascript'
     ctx.body = ''
   } catch (err) {
-    ctx.body = ctx.refail(err)
+    ctx.type = 'text/javascript'
+    ctx.body = ''
   }
 }
 
@@ -212,7 +214,8 @@ exports.addDownUserSp = async function (ctx) {
     ctx.type = 'text/javascript'
     ctx.body = ''
   } catch (err) {
-    ctx.body = ctx.refail(err)
+    ctx.type = 'text/javascript'
+    ctx.body = ''
   }
 }
 
@@ -226,7 +229,8 @@ exports.addBackUserSp = async function (ctx) {
     ctx.type = 'text/javascript'
     ctx.body = ''
   } catch (err) {
-    ctx.body = ctx.refail(err)
+    ctx.type = 'text/javascript'
+    ctx.body = ''
   }
 }
 
@@ -245,5 +249,32 @@ exports.initTrueName = async function (ctx) {
     ctx.body = ctx.resuccess(res)
   } catch (err) {
     ctx.body = ctx.refail(err)
+  }
+}
+
+exports.serverAddDownUserSp = async function (ctx) {
+  const query = ctx.query
+  try {
+    const data = ctx.validateData({
+      // 手机号
+      m: { type: 'string', required: false },
+      // 姓名
+      u: { type: 'string', required: false },
+      // 日期
+      d: { type: 'string', required: false }
+    }, query)
+    let referer = ctx.headers.referer
+    let ifDev = false
+    if (referer.indexOf('localhost') || referer.indexOf('47.110.153.34')) {
+      ifDev = true
+    }
+    if (!ifDev) {
+      await ctx.services.whiteUser.serverAddDownUserSp(data)
+    }
+    ctx.type = 'text/javascript'
+    ctx.body = ''
+  } catch (err) {
+    ctx.type = 'text/javascript'
+    ctx.body = ''
   }
 }
