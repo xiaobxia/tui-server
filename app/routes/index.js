@@ -162,8 +162,11 @@ router.get('/sp/atu', controllers.whiteUserController.addTrueNameUserSp)
 router.get('/sp/adu', controllers.whiteUserController.addDownUserSp)
 // 回款用户
 router.get('/sp/abu', controllers.whiteUserController.addBackUserSp)
-// 服务端下端数据
+// 服务端数据
 router.get('/sp/sadu', controllers.whiteUserController.serverAddDownUserSp)
+
+router.get('/sp/sabu', controllers.whiteUserController.serverAddBackUserSp)
+
 /**
  * 任务模块
  */
