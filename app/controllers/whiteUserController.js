@@ -180,14 +180,7 @@ exports.addWhiteUserSp = async function (ctx) {
       mobile: { type: 'string', required: true },
       source: { type: 'string', required: false }
     }, query)
-    let referer = ctx.headers.referer
-    let ifDev = false
-    if (referer.indexOf('localhost') || referer.indexOf('47.110.153.34')) {
-      ifDev = true
-    }
-    if (!ifDev) {
-      await ctx.services.whiteUser.addWhiteUser(data)
-    }
+    await ctx.services.whiteUser.addWhiteUser(data)
     ctx.type = 'text/javascript'
     ctx.body = ''
   } catch (err) {
@@ -202,14 +195,7 @@ exports.addTrueNameUserSp = async function (ctx) {
     const data = ctx.validateData({
       mobile: { type: 'string', required: true }
     }, query)
-    let referer = ctx.headers.referer
-    let ifDev = false
-    if (referer.indexOf('localhost') || referer.indexOf('47.110.153.34')) {
-      ifDev = true
-    }
-    if (!ifDev) {
-      await ctx.services.whiteUser.addTrueNameUser(data)
-    }
+    await ctx.services.whiteUser.addTrueNameUser(data)
     ctx.type = 'text/javascript'
     ctx.body = ''
   } catch (err) {
@@ -224,14 +210,7 @@ exports.addDownUserSp = async function (ctx) {
     const data = ctx.validateData({
       mobile: { type: 'string', required: true }
     }, query)
-    let referer = ctx.headers.referer
-    let ifDev = false
-    if (referer.indexOf('localhost') || referer.indexOf('47.110.153.34')) {
-      ifDev = true
-    }
-    if (!ifDev) {
-      await ctx.services.whiteUser.addDownUser(data)
-    }
+    await ctx.services.whiteUser.addDownUser(data)
     ctx.type = 'text/javascript'
     ctx.body = ''
   } catch (err) {
@@ -246,14 +225,7 @@ exports.addBackUserSp = async function (ctx) {
     const data = ctx.validateData({
       mobile: { type: 'string', required: true }
     }, query)
-    let referer = ctx.headers.referer
-    let ifDev = false
-    if (referer.indexOf('localhost') || referer.indexOf('47.110.153.34')) {
-      ifDev = true
-    }
-    if (!ifDev) {
-      await ctx.services.whiteUser.addBackUser(data)
-    }
+    await ctx.services.whiteUser.addBackUser(data)
     ctx.type = 'text/javascript'
     ctx.body = ''
   } catch (err) {
