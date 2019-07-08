@@ -456,13 +456,40 @@ exports.getTodayCount = async function () {
         $lt: endDay
       },
       source: 'xjd'
+    }),
+    // 今日实名
+    WhiteUserProxy.count({
+      'true_name_at': {
+        $gte: startDay,
+        $lt: endDay
+      },
+      source: 'xjd'
+    }),
+    // 今日下款
+    WhiteUserProxy.count({
+      'down_at': {
+        $gte: startDay,
+        $lt: endDay
+      },
+      source: 'xjd'
+    }),
+    // 今日回款
+    WhiteUserProxy.count({
+      'back_at': {
+        $gte: startDay,
+        $lt: endDay
+      },
+      source: 'xjd'
     })
   ])
   return {
     dayR: fetchData[0],
     dayA: fetchData[1],
     dayRX: fetchData[2],
-    dayAX: fetchData[3]
+    dayAX: fetchData[3],
+    dayTX: fetchData[4],
+    dayDX: fetchData[5],
+    dayBX: fetchData[6]
   }
 }
 
