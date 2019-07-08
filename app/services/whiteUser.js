@@ -30,12 +30,13 @@ exports.addWhiteUser = async function (data) {
   } else {
     return WhiteUserProxy.newAndSave({
       ...data,
-      active_at: Date.now()
+      active_at: Date.now(),
+      register_at: Date.now()
     })
   }
 }
 
-exports.addForceUser = async function (data) {
+exports.addRegisterUser = async function (data) {
   const user = await WhiteUserProxy.findOne({
     mobile: data.mobile
   })
@@ -46,12 +47,14 @@ exports.addForceUser = async function (data) {
     }, {
       // 更新注册时间
       create_at: Date.now(),
-      active_at: Date.now()
+      active_at: Date.now(),
+      register_at: Date.now()
     })
   } else {
     return WhiteUserProxy.newAndSave({
       mobile: data.mobile,
-      active_at: Date.now()
+      active_at: Date.now(),
+      register_at: Date.now()
     })
   }
 }
@@ -82,7 +85,8 @@ exports.addTrueNameUser = async function (data) {
       if_true_name: true,
       active_at: Date.now(),
       source: 'xjd',
-      true_name_at: Date.now()
+      true_name_at: Date.now(),
+      register_at: Date.now()
     })
   }
 }
@@ -120,7 +124,8 @@ exports.serverAddDownUserSp = async function (data) {
         active_at: Date.now(),
         source: 'xjd',
         name: nameList[i],
-        down_at: dayList[i]
+        down_at: dayList[i],
+        register_at: Date.now()
       }))
     }
   }
@@ -160,7 +165,8 @@ exports.serverAddBackUserSp = async function (data) {
         active_at: Date.now(),
         source: 'xjd',
         name: nameList[i],
-        back_at: dayList[i]
+        back_at: dayList[i],
+        register_at: Date.now()
       }))
     }
   }
@@ -193,7 +199,8 @@ exports.addDownUser = async function (data) {
       if_down: true,
       active_at: Date.now(),
       source: 'xjd',
-      down_at: Date.now()
+      down_at: Date.now(),
+      register_at: Date.now()
     })
   }
 }
@@ -224,7 +231,8 @@ exports.addBackUser = async function (data) {
       if_back: true,
       active_at: Date.now(),
       source: 'xjd',
-      back_at: Date.now()
+      back_at: Date.now(),
+      register_at: Date.now()
     })
   }
 }

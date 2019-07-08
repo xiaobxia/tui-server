@@ -30,6 +30,10 @@ const schema = new Schema({
   back_at: {
     type: Date
   },
+  // 注册时间，多平台注册
+  register_at: {
+    type: Date
+  },
   // 来源(xjd,dc)
   source: String,
   // 真是姓名

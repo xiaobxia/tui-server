@@ -160,16 +160,26 @@ exports.addBackUser = async function (ctx) {
   }
 }
 
-exports.addForceUser = async function (ctx) {
+exports.addRegisterUserSp = async function (ctx) {
   const query = ctx.request.body
   try {
     const data = ctx.validateData({
-      mobile: { type: 'string', required: true }
+      mobile: { type: 'string', required: true },
+      source: { type: 'string', required: false }
     }, query)
-    await ctx.services.whiteUser.addForceUser(data)
-    ctx.body = ctx.resuccess()
+    let referer = ctx.headers.referer
+    let ifDev = false
+    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1) {
+      ifDev = true
+    }
+    if (!ifDev) {
+      await ctx.services.whiteUser.addRegisterUser(data)
+    }
+    ctx.type = 'text/javascript'
+    ctx.body = ''
   } catch (err) {
-    ctx.body = ctx.refail(err)
+    ctx.type = 'text/javascript'
+    ctx.body = ''
   }
 }
 

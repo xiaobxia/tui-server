@@ -156,6 +156,7 @@ router.get('/whiteUser/getTodayCount', controllers.whiteUserController.getTodayC
 router.post('/whiteUser/deleteWhiteUser', controllers.whiteUserController.deleteWhiteUser)
 // 用source添加
 router.get('/sp/awu', controllers.whiteUserController.addWhiteUserSp)
+router.get('/sp/aru', controllers.whiteUserController.addRegisterUserSp)
 // 实名用户
 router.get('/sp/atu', controllers.whiteUserController.addTrueNameUserSp)
 // 下款用户
