@@ -150,6 +150,7 @@ router.get('/log/getWhiteUsersByStart', controllers.whiteUserController.getWhite
 router.get('/log/initTrueName', controllers.whiteUserController.initTrueName)
 
 router.get('/whiteUser/getWhiteUsers', controllers.whiteUserController.getWhiteUsers)
+router.get('/whiteUser/getDownUsers', controllers.whiteUserController.getDownUsers)
 router.get('/whiteUser/getBackUsers', controllers.whiteUserController.getBackUsers)
 router.get('/whiteUser/getTodayCount', controllers.whiteUserController.getTodayCount)
 router.post('/whiteUser/deleteWhiteUser', controllers.whiteUserController.deleteWhiteUser)

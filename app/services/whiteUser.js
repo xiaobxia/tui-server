@@ -295,6 +295,34 @@ exports.getWhiteUsers = async function (query, paging) {
   return { list: users, count: fetchData[1] }
 }
 
+exports.getDownUsers = async function (query, paging) {
+  const opt = {
+    skip: paging.start,
+    limit: paging.offset,
+    sort: {
+      down_at: -1
+    }
+  }
+  let queryOption = {
+    if_down: true
+  }
+  if (query.mobile) {
+    queryOption.mobile = query.mobile
+  }
+  if (query.beginTime) {
+    queryOption.down_at = {
+      $gte: query.beginTime,
+      $lt: query.endTime
+    }
+  }
+  const fetchData = await Promise.all([
+    WhiteUserProxy.find(queryOption, opt),
+    WhiteUserProxy.count(queryOption)
+  ])
+  const users = fetchData[0]
+  return { list: users, count: fetchData[1] }
+}
+
 exports.getBackUsers = async function (query, paging) {
   const opt = {
     skip: paging.start,
@@ -458,12 +486,14 @@ exports.getTodayCount = async function () {
   let startDay = moment(moment().format('YYYY-MM-DD')).format('YYYY-MM-DD HH:mm:ss')
   let endDay = moment(moment().add(1, 'days').format('YYYY-MM-DD')).format('YYYY-MM-DD HH:mm:ss')
   const fetchData = await Promise.all([
-    // 今日注册
+    // 今日注册A料
     WhiteUserProxy.count({
       'create_at': {
         $gte: startDay,
         $lt: endDay
-      }
+      },
+      'if_down': false,
+      'if_back': false
     }),
     // 今日活跃
     WhiteUserProxy.count({
@@ -472,13 +502,17 @@ exports.getTodayCount = async function () {
         $lt: endDay
       }
     }),
+    // 今日注册现金贷
     WhiteUserProxy.count({
       'create_at': {
         $gte: startDay,
         $lt: endDay
       },
-      source: 'xjd'
+      source: 'xjd',
+      'if_down': false,
+      'if_back': false
     }),
+    // 今日活跃现金贷
     WhiteUserProxy.count({
       'active_at': {
         $gte: startDay,
@@ -509,6 +543,14 @@ exports.getTodayCount = async function () {
         $lt: endDay
       },
       source: 'xjd'
+    }),
+    // 今日注册贷超
+    WhiteUserProxy.count({
+      'create_at': {
+        $gte: startDay,
+        $lt: endDay
+      },
+      source: 'dc'
     })
   ])
   return {
@@ -518,7 +560,8 @@ exports.getTodayCount = async function () {
     dayAX: fetchData[3],
     dayTX: fetchData[4],
     dayDX: fetchData[5],
-    dayBX: fetchData[6]
+    dayBX: fetchData[6],
+    dayRD: fetchData[6]
   }
 }
 
