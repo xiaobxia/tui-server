@@ -295,6 +295,35 @@ exports.getWhiteUsers = async function (query, paging) {
   return { list: users, count: fetchData[1] }
 }
 
+exports.getBackUsers = async function (query, paging) {
+  const opt = {
+    skip: paging.start,
+    limit: paging.offset,
+    // 点击数多的靠前
+    sort: {
+      back_at: -1
+    }
+  }
+  let queryOption = {
+    if_back: true
+  }
+  if (query.mobile) {
+    queryOption.mobile = query.mobile
+  }
+  if (query.beginTime) {
+    queryOption.back_at = {
+      $gte: query.beginTime,
+      $lt: query.endTime
+    }
+  }
+  const fetchData = await Promise.all([
+    WhiteUserProxy.find(queryOption, opt),
+    WhiteUserProxy.count(queryOption)
+  ])
+  const users = fetchData[0]
+  return { list: users, count: fetchData[1] }
+}
+
 exports.getWhiteUsersByStart = async function (query) {
   let sort = {
     create_at: -1
