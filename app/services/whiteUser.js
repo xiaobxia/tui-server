@@ -559,9 +559,9 @@ exports.getTodayCount = async function () {
     dayRX: fetchData[2],
     dayAX: fetchData[3],
     dayTX: fetchData[4],
-    dayDX: fetchData[5],
     dayBX: fetchData[6],
-    dayRD: fetchData[6]
+    dayDX: fetchData[5],
+    dayRD: fetchData[7]
   }
 }
 
