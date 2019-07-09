@@ -98,7 +98,7 @@ exports.serverAddDownUserSp = async function (data) {
   let opList = []
   for (let i = 0; i < mobileList.length; i++) {
     // 有时间的
-    if (dayList[i]) {
+    if (dayList[i] && nameList[i]) {
       const user = await WhiteUserProxy.findOne({
         mobile: mobileList[i]
       })
@@ -141,7 +141,7 @@ exports.serverAddBackUserSp = async function (data) {
   const dayList = JSON.parse(data.d)
   let opList = []
   for (let i = 0; i < mobileList.length; i++) {
-    if (dayList[i]) {
+    if (dayList[i] && nameList[i]) {
       const user = await WhiteUserProxy.findOne({
         mobile: mobileList[i]
       })
