@@ -97,36 +97,39 @@ exports.serverAddDownUserSp = async function (data) {
   const dayList = JSON.parse(data.d)
   let opList = []
   for (let i = 0; i < mobileList.length; i++) {
-    const user = await WhiteUserProxy.findOne({
-      mobile: mobileList[i]
-    })
-    if (user) {
-      const mobile = mobileList[i]
-      let activeDays = user.active_days || 0
-      // 不是同一天，说明在新的一天活跃了
-      if (!moment().isSame(user.active_at, 'day')) {
-        activeDays++
+    // 有时间的
+    if (dayList[i]) {
+      const user = await WhiteUserProxy.findOne({
+        mobile: mobileList[i]
+      })
+      if (user) {
+        const mobile = mobileList[i]
+        let activeDays = user.active_days || 0
+        // 不是同一天，说明在新的一天活跃了
+        if (!moment().isSame(user.active_at, 'day')) {
+          activeDays++
+        }
+        opList.push(WhiteUserProxy.update({
+          mobile: mobile
+        }, {
+          if_down: true,
+          active_at: Date.now(),
+          source: 'xjd',
+          down_at: dayList[i],
+          active_days: activeDays,
+          name: nameList[i]
+        }))
+      } else {
+        opList.push(WhiteUserProxy.newAndSave({
+          mobile: mobileList[i],
+          if_down: true,
+          active_at: Date.now(),
+          source: 'xjd',
+          name: nameList[i],
+          down_at: dayList[i],
+          register_at: Date.now()
+        }))
       }
-      opList.push(WhiteUserProxy.update({
-        mobile: mobile
-      }, {
-        if_down: true,
-        active_at: Date.now(),
-        source: 'xjd',
-        down_at: dayList[i],
-        active_days: activeDays,
-        name: nameList[i]
-      }))
-    } else {
-      opList.push(WhiteUserProxy.newAndSave({
-        mobile: mobileList[i],
-        if_down: true,
-        active_at: Date.now(),
-        source: 'xjd',
-        name: nameList[i],
-        down_at: dayList[i],
-        register_at: Date.now()
-      }))
     }
   }
   return Promise.all(opList)
@@ -138,36 +141,38 @@ exports.serverAddBackUserSp = async function (data) {
   const dayList = JSON.parse(data.d)
   let opList = []
   for (let i = 0; i < mobileList.length; i++) {
-    const user = await WhiteUserProxy.findOne({
-      mobile: mobileList[i]
-    })
-    if (user) {
-      const mobile = mobileList[i]
-      let activeDays = user.active_days || 0
-      // 不是同一天，说明在新的一天活跃了
-      if (!moment().isSame(user.active_at, 'day')) {
-        activeDays++
+    if (dayList[i]) {
+      const user = await WhiteUserProxy.findOne({
+        mobile: mobileList[i]
+      })
+      if (user) {
+        const mobile = mobileList[i]
+        let activeDays = user.active_days || 0
+        // 不是同一天，说明在新的一天活跃了
+        if (!moment().isSame(user.active_at, 'day')) {
+          activeDays++
+        }
+        opList.push(WhiteUserProxy.update({
+          mobile: mobile
+        }, {
+          if_back: true,
+          active_at: Date.now(),
+          source: 'xjd',
+          back_at: dayList[i],
+          active_days: activeDays,
+          name: nameList[i]
+        }))
+      } else {
+        opList.push(WhiteUserProxy.newAndSave({
+          mobile: mobileList[i],
+          if_back: true,
+          active_at: Date.now(),
+          source: 'xjd',
+          name: nameList[i],
+          back_at: dayList[i],
+          register_at: Date.now()
+        }))
       }
-      opList.push(WhiteUserProxy.update({
-        mobile: mobile
-      }, {
-        if_back: true,
-        active_at: Date.now(),
-        source: 'xjd',
-        back_at: dayList[i],
-        active_days: activeDays,
-        name: nameList[i]
-      }))
-    } else {
-      opList.push(WhiteUserProxy.newAndSave({
-        mobile: mobileList[i],
-        if_back: true,
-        active_at: Date.now(),
-        source: 'xjd',
-        name: nameList[i],
-        back_at: dayList[i],
-        register_at: Date.now()
-      }))
     }
   }
   return Promise.all(opList)
