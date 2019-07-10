@@ -207,7 +207,7 @@ exports.addRegisterUserSp = async function (ctx) {
     }, query)
     let referer = ctx.headers.referer
     let ifDev = false
-    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com' !== -1)) {
+    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com')!== -1) {
       ifDev = true
     }
     if (!ifDev) {
@@ -230,7 +230,7 @@ exports.addWhiteUserSp = async function (ctx) {
     }, query)
     let referer = ctx.headers.referer
     let ifDev = false
-    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com' !== -1)) {
+    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com')!== -1) {
       ifDev = true
     }
     if (!ifDev) {
@@ -252,7 +252,7 @@ exports.addTrueNameUserSp = async function (ctx) {
     }, query)
     let referer = ctx.headers.referer
     let ifDev = false
-    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com' !== -1)) {
+    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com')!== -1) {
       ifDev = true
     }
     if (!ifDev) {
@@ -274,7 +274,7 @@ exports.addDownUserSp = async function (ctx) {
     }, query)
     let referer = ctx.headers.referer
     let ifDev = false
-    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com' !== -1)) {
+    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com')!== -1) {
       ifDev = true
     }
     if (!ifDev) {
@@ -296,7 +296,7 @@ exports.addBackUserSp = async function (ctx) {
     }, query)
     let referer = ctx.headers.referer
     let ifDev = false
-    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com' !== -1)) {
+    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com')!== -1) {
       ifDev = true
     }
     if (!ifDev) {
@@ -341,7 +341,7 @@ exports.serverAddDownUserSp = async function (ctx) {
     }, query)
     let referer = ctx.headers.referer
     let ifDev = false
-    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com' !== -1)) {
+    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com')!== -1) {
       ifDev = true
     }
     if (!ifDev) {
@@ -368,7 +368,7 @@ exports.serverAddBackUserSp = async function (ctx) {
     }, query)
     let referer = ctx.headers.referer
     let ifDev = false
-    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com' !== -1)) {
+    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com')!== -1) {
       ifDev = true
     }
     if (!ifDev) {
