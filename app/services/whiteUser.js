@@ -45,8 +45,6 @@ exports.addRegisterUser = async function (data) {
     return WhiteUserProxy.update({
       mobile: mobile
     }, {
-      // 更新注册时间
-      create_at: Date.now(),
       active_at: Date.now(),
       register_at: Date.now()
     })
@@ -418,6 +416,12 @@ exports.getWhiteUsersByStart = async function (query) {
       $lt: query.endTimeB
     }
   }
+  if (query.beginTimeR) {
+    queryOption.register_at = {
+      $gte: query.beginTimR,
+      $lt: query.endTimeR
+    }
+  }
   const fetchData = await Promise.all([
     WhiteUserProxy.find(queryOption, opt),
     WhiteUserProxy.count(queryOption)
@@ -499,7 +503,7 @@ exports.getTodayCount = async function () {
   const fetchData = await Promise.all([
     // 今日注册A料
     WhiteUserProxy.count({
-      'create_at': {
+      'register_at': {
         $gte: startDay,
         $lt: endDay
       },
@@ -515,7 +519,7 @@ exports.getTodayCount = async function () {
     }),
     // 今日注册现金贷
     WhiteUserProxy.count({
-      'create_at': {
+      'register_at': {
         $gte: startDay,
         $lt: endDay
       },
@@ -557,7 +561,7 @@ exports.getTodayCount = async function () {
     }),
     // 今日注册贷超
     WhiteUserProxy.count({
-      'create_at': {
+      'register_at': {
         $gte: startDay,
         $lt: endDay
       },
