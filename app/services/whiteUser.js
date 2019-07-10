@@ -412,6 +412,12 @@ exports.getWhiteUsersByStart = async function (query) {
       $lt: query.endTimeA
     }
   }
+  if (query.beginTimeB) {
+    queryOption.back_at = {
+      $gte: query.beginTimeB,
+      $lt: query.endTimeB
+    }
+  }
   const fetchData = await Promise.all([
     WhiteUserProxy.find(queryOption, opt),
     WhiteUserProxy.count(queryOption)

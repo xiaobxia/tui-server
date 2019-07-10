@@ -109,6 +109,8 @@ exports.getWhiteUsersByStart = async function (ctx) {
       endTime: { required: false, type: 'string' },
       beginTimeA: { required: false, type: 'string' },
       endTimeA: { required: false, type: 'string' },
+      beginTimeB: { required: false, type: 'string' },
+      endTimeB: { required: false, type: 'string' },
       if_true_name: { required: false, type: 'string' },
       if_down: { required: false, type: 'string' },
       if_back: { required: false, type: 'string' },
