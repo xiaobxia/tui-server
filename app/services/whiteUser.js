@@ -418,8 +418,14 @@ exports.getWhiteUsersByStart = async function (query) {
   }
   if (query.beginTimeR) {
     queryOption.register_at = {
-      $gte: query.beginTimR,
+      $gte: query.beginTimeR,
       $lt: query.endTimeR
+    }
+  }
+  if (query.beginTimeD) {
+    queryOption.down_at = {
+      $gte: query.beginTimeD,
+      $lt: query.endTimeD
     }
   }
   const fetchData = await Promise.all([
