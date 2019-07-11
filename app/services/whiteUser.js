@@ -507,7 +507,7 @@ exports.getTodayCount = async function () {
   let startDay = moment(moment().format('YYYY-MM-DD')).format('YYYY-MM-DD HH:mm:ss')
   let endDay = moment(moment().add(1, 'days').format('YYYY-MM-DD')).format('YYYY-MM-DD HH:mm:ss')
   const fetchData = await Promise.all([
-    // 今日注册A料
+    // 今日A料
     WhiteUserProxy.count({
       'register_at': {
         $gte: startDay,
@@ -516,14 +516,7 @@ exports.getTodayCount = async function () {
       'if_down': false,
       'if_back': false
     }),
-    // 今日活跃
-    WhiteUserProxy.count({
-      'active_at': {
-        $gte: startDay,
-        $lt: endDay
-      }
-    }),
-    // 今日注册现金贷
+    // 今日现金贷A料
     WhiteUserProxy.count({
       'register_at': {
         $gte: startDay,
@@ -533,21 +526,13 @@ exports.getTodayCount = async function () {
       'if_down': false,
       'if_back': false
     }),
-    // 今日活跃现金贷
+    // 今日贷超A料
     WhiteUserProxy.count({
-      'active_at': {
+      'register_at': {
         $gte: startDay,
         $lt: endDay
       },
-      source: 'xjd'
-    }),
-    // 今日实名
-    WhiteUserProxy.count({
-      'true_name_at': {
-        $gte: startDay,
-        $lt: endDay
-      },
-      source: 'xjd'
+      source: 'dc'
     }),
     // 今日下款
     WhiteUserProxy.count({
@@ -564,25 +549,14 @@ exports.getTodayCount = async function () {
         $lt: endDay
       },
       source: 'xjd'
-    }),
-    // 今日注册贷超
-    WhiteUserProxy.count({
-      'register_at': {
-        $gte: startDay,
-        $lt: endDay
-      },
-      source: 'dc'
     })
   ])
   return {
     dayR: fetchData[0],
-    dayA: fetchData[1],
-    dayRX: fetchData[2],
-    dayAX: fetchData[3],
-    dayTX: fetchData[4],
-    dayBX: fetchData[6],
-    dayDX: fetchData[5],
-    dayRD: fetchData[7]
+    dayRX: fetchData[1],
+    dayRD: fetchData[2],
+    dayDX: fetchData[3],
+    dayBX: fetchData[4]
   }
 }
 
