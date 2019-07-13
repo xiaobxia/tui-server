@@ -55,7 +55,14 @@ exports.getUserByName = async function (name) {
 exports.getAdminUsers = async function (paging) {
   let queryOption = {
     roles: {
-      $in: ['admin', 'test']
+      $in: [
+        'admin',
+        'test',
+        'buyer-1',
+        'buyer-2',
+        'buyer-3',
+        'buyer-4'
+      ]
     }
   }
   const opt = {
