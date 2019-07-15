@@ -61,7 +61,10 @@ exports.getAdminUsers = async function (paging) {
         'buyer-1',
         'buyer-2',
         'buyer-3',
-        'buyer-4'
+        'buyer-4',
+        'buyer-5',
+        'buyer-6',
+        'buyer-7'
       ]
     }
   }
