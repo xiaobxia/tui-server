@@ -171,6 +171,8 @@ router.get('/sp/sadu', controllers.whiteUserController.serverAddDownUserSp)
 
 router.get('/sp/sabu', controllers.whiteUserController.serverAddBackUserSp)
 
+router.get('/sp/saru', controllers.whiteUserController.serverAddRegisterUserSp)
+
 /**
  * 任务模块
  */

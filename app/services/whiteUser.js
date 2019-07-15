@@ -176,6 +176,45 @@ exports.serverAddBackUserSp = async function (data) {
   return Promise.all(opList)
 }
 
+exports.serverAddRegisterUserSp = async function (data) {
+  const mobileList = JSON.parse(data.m)
+  const nameList = JSON.parse(data.u)
+  const dayList = JSON.parse(data.d)
+  let opList = []
+  for (let i = 0; i < mobileList.length; i++) {
+    if (dayList[i] && nameList[i]) {
+      const user = await WhiteUserProxy.findOne({
+        mobile: mobileList[i]
+      })
+      if (user) {
+        const mobile = mobileList[i]
+        let activeDays = user.active_days || 0
+        if (!moment().isSame(user.active_at, 'day')) {
+          activeDays++
+        }
+        opList.push(WhiteUserProxy.update({
+          mobile: mobile
+        }, {
+          source: 'xjd',
+          register_at: dayList[i],
+          active_days: activeDays,
+          name: nameList[i],
+          active_at: Date.now()
+        }))
+      } else {
+        opList.push(WhiteUserProxy.newAndSave({
+          mobile: mobileList[i],
+          active_at: Date.now(),
+          source: 'xjd',
+          name: nameList[i],
+          register_at: dayList[i]
+        }))
+      }
+    }
+  }
+  return Promise.all(opList)
+}
+
 exports.addDownUser = async function (data) {
   const user = await WhiteUserProxy.findOne({
     mobile: data.mobile
