@@ -52,6 +52,14 @@ exports.getUserByName = async function (name) {
   return user
 }
 
+exports.getAdmin = async function (name) {
+  const user = await UserProxy.findOne({ name: name, status: 1 })
+  if (!user) {
+    throw new Error('用户不存在')
+  }
+  return user
+}
+
 exports.getAdminUsers = async function (paging) {
   let queryOption = {
     roles: {

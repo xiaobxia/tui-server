@@ -11,7 +11,7 @@ const ChannelProxy = Proxy.Channel
  * @returns {Promise<void>}
  */
 exports.login = async function (account, password) {
-  const user = await UserProxy.findOne({ name: account })
+  const user = await UserProxy.findOne({ name: account, status: 1 })
   if (!user) {
     throw new Error('用户不存在')
   }

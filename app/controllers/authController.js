@@ -85,6 +85,7 @@ exports.checkLogin = async function (ctx) {
   if (token) {
     try {
       const tokenRaw = ctx.token.verify(token)
+      await ctx.services.user.getAdmin(tokenRaw.name)
       const user = ctx.formatFields(tokenRes, tokenRaw)
       ctx.body = ctx.resuccess({
         ...user,
