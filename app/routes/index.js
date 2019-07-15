@@ -153,6 +153,7 @@ router.get('/whiteUser/getWhiteUsers', controllers.whiteUserController.getWhiteU
 router.get('/whiteUser/getDownUsers', controllers.whiteUserController.getDownUsers)
 router.get('/whiteUser/getBackUsers', controllers.whiteUserController.getBackUsers)
 router.get('/whiteUser/getTodayRegisterUsers', controllers.whiteUserController.getTodayRegisterUsers)
+router.get('/whiteUser/getTodayDownUsers', controllers.whiteUserController.getTodayDownUsers)
 router.get('/whiteUser/getTodayBackUsers', controllers.whiteUserController.getTodayBackUsers)
 router.get('/whiteUser/getTodayCount', controllers.whiteUserController.getTodayCount)
 router.post('/whiteUser/deleteWhiteUser', controllers.whiteUserController.deleteWhiteUser)
