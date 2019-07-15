@@ -182,7 +182,7 @@ exports.serverAddRegisterUserSp = async function (data) {
   const dayList = JSON.parse(data.d)
   let opList = []
   for (let i = 0; i < mobileList.length; i++) {
-    if (dayList[i] && nameList[i]) {
+    if (dayList[i]) {
       const user = await WhiteUserProxy.findOne({
         mobile: mobileList[i]
       })
@@ -192,15 +192,18 @@ exports.serverAddRegisterUserSp = async function (data) {
         if (!moment().isSame(user.active_at, 'day')) {
           activeDays++
         }
-        opList.push(WhiteUserProxy.update({
-          mobile: mobile
-        }, {
+        let updateData = {
           source: 'xjd',
           register_at: dayList[i],
           active_days: activeDays,
-          name: nameList[i],
           active_at: Date.now()
-        }))
+        }
+        if (nameList[i]) {
+          updateData.name = nameList[i]
+        }
+        opList.push(WhiteUserProxy.update({
+          mobile: mobile
+        }, updateData))
       } else {
         opList.push(WhiteUserProxy.newAndSave({
           mobile: mobileList[i],
