@@ -72,7 +72,8 @@ exports.getAdminUsers = async function (paging) {
         'buyer-4',
         'buyer-5',
         'buyer-6',
-        'buyer-7'
+        'buyer-7',
+        'buyer-8'
       ]
     }
   }
@@ -102,8 +103,8 @@ exports.addAdminUser = async function (data) {
 
 exports.updateAdminUser = async function (data) {
   let updateData = {}
-  if (data.password) {
-    updateData.password_raw = data.password
+  if (data.password_raw) {
+    updateData.password_raw = data.password_raw
     updateData.password = md5(updateData.password_raw)
   }
   if (data.roles) {

@@ -33,7 +33,7 @@ exports.updateAdminUser = async function (ctx) {
   try {
     const data = ctx.validateData({
       name: { type: 'string', required: true },
-      password: { type: 'string', required: false },
+      password_raw: { type: 'string', required: false },
       roles: { type: 'string', required: false },
       status: { type: 'int', required: false }
     }, query)
