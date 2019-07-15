@@ -400,3 +400,18 @@ exports.getTodayBackUsers = async function (ctx) {
     ctx.body = ctx.refail(err)
   }
 }
+
+exports.getTodayRegisterUsers = async function (ctx) {
+  const query = ctx.query
+  try {
+    const data = ctx.validateData({
+      current: { type: 'int', required: true },
+      pageSize: { type: 'int', required: true }
+    }, query)
+    let paging = ctx.paging(data.current, data.pageSize)
+    const users = await ctx.services.whiteUser.getTodayRegisterUsers(data, paging)
+    ctx.body = ctx.resuccess(users)
+  } catch (err) {
+    ctx.body = ctx.refail(err)
+  }
+}

@@ -355,6 +355,32 @@ exports.getBackUsers = async function (query, paging) {
   return { list: users, count: fetchData[1] }
 }
 
+exports.getTodayRegisterUsers = async function (query, paging) {
+  const opt = {
+    skip: paging.start,
+    limit: paging.offset,
+    sort: {
+      register_at: -1
+    }
+  }
+  let queryOption = {
+    'if_down': false,
+    'if_back': false
+  }
+  const start = moment(moment().format('YYYY-MM-DD')).format('YYYY-MM-DD HH:mm:ss')
+  const end = moment(moment().add(1, 'days').format('YYYY-MM-DD')).format('YYYY-MM-DD HH:mm:ss')
+  queryOption.register_at = {
+    $gte: start,
+    $lt: end
+  }
+  const fetchData = await Promise.all([
+    WhiteUserProxy.find(queryOption, opt),
+    WhiteUserProxy.count(queryOption)
+  ])
+  const users = fetchData[0]
+  return { list: users, count: fetchData[1] }
+}
+
 exports.getTodayBackUsers = async function (query, paging) {
   const opt = {
     skip: paging.start,
