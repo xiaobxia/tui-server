@@ -5,7 +5,7 @@ function ifInDev (referer) {
     'taodou.domiuo.com',
     '47.111.136.48'
   ]
-  for (let i=0;i<list.length;i++) {
+  for (let i = 0; i < list.length; i++) {
     if (referer.indexOf(list[i]) !== -1) {
       return true
     }
