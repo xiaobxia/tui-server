@@ -94,9 +94,9 @@ exports.addAdminUser = async function (data) {
     // 昵称
     name: data.name,
     // 密码明文
-    password_raw: data.password,
+    password_raw: data.password_raw,
     // 密码
-    password: md5(data.password),
+    password: md5(data.password_raw),
     roles: [data.roles]
   })
 }

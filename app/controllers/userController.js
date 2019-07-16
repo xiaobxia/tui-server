@@ -18,7 +18,7 @@ exports.addAdminUser = async function (ctx) {
   try {
     const data = ctx.validateData({
       name: { type: 'string', required: true },
-      password: { type: 'string', required: true },
+      password_raw: { type: 'string', required: true },
       roles: { type: 'string', required: true }
     }, query)
     await ctx.services.user.addAdminUser(data)
