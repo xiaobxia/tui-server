@@ -1,3 +1,18 @@
+function ifInDev (referer) {
+  let list = [
+    'localhost',
+    '47.110.153.34',
+    'taodou.domiuo.com',
+    '47.111.136.48'
+  ]
+  for (let i=0;i<list.length;i++) {
+    if (referer.indexOf(list[i]) !== -1) {
+      return true
+    }
+  }
+  return false
+}
+
 exports.addWhiteUser = async function (ctx) {
   const query = ctx.request.body
   try {
@@ -210,10 +225,7 @@ exports.addRegisterUserSp = async function (ctx) {
       source: { type: 'string', required: false }
     }, query)
     let referer = ctx.headers.referer
-    let ifDev = false
-    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com') !== -1) {
-      ifDev = true
-    }
+    let ifDev = ifInDev(referer)
     if (!ifDev) {
       await ctx.services.whiteUser.addRegisterUser(data)
     }
@@ -233,10 +245,7 @@ exports.addWhiteUserSp = async function (ctx) {
       source: { type: 'string', required: false }
     }, query)
     let referer = ctx.headers.referer
-    let ifDev = false
-    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com') !== -1) {
-      ifDev = true
-    }
+    let ifDev = ifInDev(referer)
     if (!ifDev) {
       await ctx.services.whiteUser.addWhiteUser(data)
     }
@@ -255,10 +264,7 @@ exports.addTrueNameUserSp = async function (ctx) {
       mobile: { type: 'string', required: true }
     }, query)
     let referer = ctx.headers.referer
-    let ifDev = false
-    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com') !== -1) {
-      ifDev = true
-    }
+    let ifDev = ifInDev(referer)
     if (!ifDev) {
       await ctx.services.whiteUser.addTrueNameUser(data)
     }
@@ -277,10 +283,7 @@ exports.addDownUserSp = async function (ctx) {
       mobile: { type: 'string', required: true }
     }, query)
     let referer = ctx.headers.referer
-    let ifDev = false
-    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com') !== -1) {
-      ifDev = true
-    }
+    let ifDev = ifInDev(referer)
     if (!ifDev) {
       await ctx.services.whiteUser.addDownUser(data)
     }
@@ -299,10 +302,7 @@ exports.addBackUserSp = async function (ctx) {
       mobile: { type: 'string', required: true }
     }, query)
     let referer = ctx.headers.referer
-    let ifDev = false
-    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com') !== -1) {
-      ifDev = true
-    }
+    let ifDev = ifInDev(referer)
     if (!ifDev) {
       await ctx.services.whiteUser.addBackUser(data)
     }
@@ -344,10 +344,7 @@ exports.serverAddDownUserSp = async function (ctx) {
       d: { type: 'string', required: false }
     }, query)
     let referer = ctx.headers.referer
-    let ifDev = false
-    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com') !== -1) {
-      ifDev = true
-    }
+    let ifDev = ifInDev(referer)
     if (!ifDev) {
       await ctx.services.whiteUser.serverAddDownUserSp(data)
     }
@@ -371,10 +368,7 @@ exports.serverAddBackUserSp = async function (ctx) {
       d: { type: 'string', required: false }
     }, query)
     let referer = ctx.headers.referer
-    let ifDev = false
-    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com') !== -1) {
-      ifDev = true
-    }
+    let ifDev = ifInDev(referer)
     if (!ifDev) {
       await ctx.services.whiteUser.serverAddBackUserSp(data)
     }
@@ -398,10 +392,7 @@ exports.serverAddRegisterUserSp = async function (ctx) {
       d: { type: 'string', required: false }
     }, query)
     let referer = ctx.headers.referer
-    let ifDev = false
-    if (referer.indexOf('localhost') !== -1 || referer.indexOf('47.110.153.34') !== -1 || referer.indexOf('taodou.domiuo.com') !== -1) {
-      ifDev = true
-    }
+    let ifDev = ifInDev(referer)
     if (!ifDev) {
       await ctx.services.whiteUser.serverAddRegisterUserSp(data)
     }
