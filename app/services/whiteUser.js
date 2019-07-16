@@ -453,7 +453,7 @@ exports.getTodayDownUsers = async function (query, paging) {
     skip: paging.start,
     limit: paging.offset,
     sort: {
-      back_at: -1
+      down_at: -1
     }
   }
   let queryOption = {
