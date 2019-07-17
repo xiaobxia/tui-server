@@ -3,7 +3,7 @@ function ifInDev (referer) {
     'localhost',
     '47.110.153.34',
     // 'taodou.domiuo.com',
-    '47.111.136.48'
+    // '47.111.136.48'
   ]
   for (let i = 0; i < list.length; i++) {
     if (referer.indexOf(list[i]) !== -1) {
