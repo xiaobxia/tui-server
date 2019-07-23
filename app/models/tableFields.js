@@ -105,6 +105,7 @@ module.exports = {
     query: [
       { field: 'name', type: 'string', required: false, regExp: true },
       { field: 'status', type: 'int', required: false },
+      { field: 'type', type: 'int', required: false },
       { field: 'is_recommend', type: 'boolean', required: false },
       { field: 'is_activity', type: 'boolean', required: false }
     ],
@@ -129,7 +130,8 @@ module.exports = {
       { field: 'today_register_count', type: 'number' },
       { field: 'history_register_count', type: 'number' },
       { field: 'sortIndex', type: 'number' },
-      { field: 'introduction', type: 'string' }
+      { field: 'introduction', type: 'string' },
+      { field: 'type', type: 'int'}
     ]
   },
   customer: {

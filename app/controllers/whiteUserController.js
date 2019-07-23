@@ -1,7 +1,7 @@
 function ifInDev (referer) {
   let list = [
     'localhost',
-    '47.110.153.34',
+    '47.110.153.34'
     // 'taodou.domiuo.com',
     // '47.111.136.48'
   ]

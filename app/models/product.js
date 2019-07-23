@@ -76,6 +76,11 @@ const schema = new Schema({
   },
   // 产品简介
   introduction: String,
+  // 给谁看的1是甲方，2是任务平台
+  type: {
+    type: Number,
+    default: 1
+  },
   create_at: {
     type: Date,
     default: Date.now
