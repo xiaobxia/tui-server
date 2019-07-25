@@ -133,7 +133,7 @@ module.exports = {
       { field: 'sortIndex', type: 'number' },
       { field: 'introduction', type: 'string' },
       { field: 'type', type: 'int' },
-      { field: 'platform', type: 'int'}
+      { field: 'platform', type: 'int' }
     ]
   },
   customer: {
