@@ -77,6 +77,11 @@ const schema = new Schema({
   // 产品简介
   introduction: String,
   // 给谁看的1是甲方，2是任务平台
+  platform: {
+    type: Number,
+    default: 1
+  },
+  // 1现金贷,2贷超
   type: {
     type: Number,
     default: 1
