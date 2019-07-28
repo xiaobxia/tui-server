@@ -38,6 +38,6 @@ exports.VcToken = require('./vcToken')
 exports.WhiteUser = require('./whiteUser')
 exports.DayChannelSingle = require('./dayChannelSingle')
 exports.DayProductSingle = require('./dayProductSingle')
-
+exports.ArticleLink = require('./articleLink')
 // 字段
 exports.tableFields = require('./tableFields')

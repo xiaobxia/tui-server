@@ -191,4 +191,10 @@ router.get('/agent/rg', controllers.dayChannelSingleController.getDayChannelSing
  */
 router.get('/user/getCustomers', controllers.customerController.getCustomers)
 
+/**
+ * kindle链接模块
+ */
+router.get('/kindle/getArticleLinks', controllers.articleLinkController.getArticleLinks)
+router.post('/kindle/addArticleLink', controllers.articleLinkController.addArticleLink)
+router.get('/kindle/deleteArticleLink', controllers.articleLinkController.deleteArticleLink)
 module.exports = router
