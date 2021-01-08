@@ -2,8 +2,8 @@ const proxys = require('./app/proxy/index')
 const md5 = require('md5')
 
 proxys.User.newAndSave({
-  name: 'xiaobxia',
-  password: md5('xiaobxia'),
+  name: 'fuge',
+  password: md5('fuge'),
   roles: ['admin']
 }).then((doc) => {
   // 添加系统渠道

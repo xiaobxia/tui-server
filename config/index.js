@@ -2,11 +2,11 @@ const path = require('path')
 const env = process.env.NODE_ENV
 const isDev = env !== 'prod'
 
-let dbAddress = 'mongodb://localhost:27017/tuiServer'
+let dbAddress = 'mongodb://tuiServer:tuiServer@localhost:27017/tuiServer'
 
 // 测试
 if (isDev) {
-  dbAddress = 'mongodb://47.92.210.171:27017/tuiServer'
+  dbAddress = 'mongodb://tuiServer:tuiServer@8.136.27.152:27017/tuiServer'
 }
 
 const root = path.resolve(__dirname, '../')
