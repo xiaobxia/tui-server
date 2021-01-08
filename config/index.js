@@ -40,7 +40,7 @@ module.exports = {
     zone: 'Zone_z0',
     accessKey: 'mE_KVunTNvnBqk70urXj6IPwA7AkF0f7n_ge6ljt',
     secretKey: 'cuRZJGuJ-FaHanoLznTjEypr-_KIRQZHZAkImZlt',
-    bucketCode: 'tui-info'
+    bucketCode: 'fgtuiinfo'
   },
   // 邮件配置
   email: {
